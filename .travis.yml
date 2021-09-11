@@ -9,18 +9,22 @@ jobs:
     - rvm: '3.0'
     - rvm: jruby-19mode
       jdk: openjdk8
+      env: COVERAGE="travis" JRUBY_OPTS="--debug"
     - rvm: jruby-19mode
       jdk: openjdk11
+      env: COVERAGE="travis" JRUBY_OPTS="--debug"
     - rvm: jruby-9.2.19.0
       jdk: openjdk8
+      env: COVERAGE="travis" JRUBY_OPTS="--debug"
     - rvm: jruby-9.2.19.0
       jdk: openjdk11
+      env: COVERAGE="travis" JRUBY_OPTS="--debug"
   allow_failures:
     - rvm: '3.0'
 # before_script:
   # - cp config/settings.example.yml config/settings.yml
 env:
-  - COVERAGE=on
+  - COVERAGE="travis"
 notifications:
   email:
     recipients:
