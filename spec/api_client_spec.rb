@@ -55,12 +55,12 @@ describe ISBMRestAdaptor::ApiClient do
     let(:config) { ISBMRestAdaptor::Configuration.new }
     let(:api_client) { ISBMRestAdaptor::ApiClient.new(config) }
 
-    it 'defaults to nil' do
-      expect(ISBMRestAdaptor::Configuration.default.params_encoding).to eq(nil)
-      expect(config.params_encoding).to eq(nil)
+    it 'defaults to :rack' do
+      expect(ISBMRestAdaptor::Configuration.default.params_encoding).to eq(:rack)
+      expect(config.params_encoding).to eq(:rack)
 
       request = api_client.build_request(:get, '/test')
-      expect(request.options[:params_encoding]).to eq(nil)
+      expect(request.options[:params_encoding]).to eq(:rack)
     end
 
     it 'can be customized' do
