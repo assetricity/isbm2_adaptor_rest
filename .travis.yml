@@ -1,10 +1,10 @@
 language: ruby
 cache: bundler
 rvm:
-  - 1.9.3
-  - 2.5
+  - '1.9.3'
+  - '2.5'
   - jruby-19mode
-  - jruby-25mode
+  - jruby-9.2.19.0
 jdk:
   - openjdk8
   - openjdk11
@@ -12,26 +12,26 @@ jdk:
   - oraclejdk11
 jobs:
   include: 
-    - rvm: 1.9.3
+    - rvm: '1.9.3'
       jdk: ''
-    - rvm: 2.5
+    - rvm: '2.5'
       jdk: ''
   exclude:
-    - rvm: 1.9.3
+    - rvm: '1.9.3'
       jdk: openjdk8
-    - rvm: 1.9.3
+    - rvm: '1.9.3'
       jdk: oraclejdk8
-    - rvm: 1.9.3
+    - rvm: '1.9.3'
       jdk: openjdk11
-    - rvm: 1.9.3
+    - rvm: '1.9.3'
       jdk: oraclejdk11
-    - rvm: 2.5
+    - rvm: '2.5'
       jdk: openjdk8
-    - rvm: 2.5
+    - rvm: '2.5'
       jdk: oraclejdk8
-    - rvm: 2.5
+    - rvm: '2.5'
       jdk: openjdk11
-    - rvm: 2.5
+    - rvm: '2.5'
       jdk: oraclejdk11
     - jdk: oraclejdk8
     - jdk: oraclejdk11
@@ -43,7 +43,7 @@ notifications:
   email:
     recipients:
       - cintegration@assetricity.com
-bundler_args: --without development --with test
+bundler_args: --without debugging
 script:
   - bundle config set --local path 'vendor/bundle'
   - bundle install

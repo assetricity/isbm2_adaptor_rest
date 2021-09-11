@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 gemspec
 
-group :development do
-  gem 'pry-byebug', platforms: ['ruby', 'mingw', 'x64_mingw', 'mswin']
-  # gem 'pry-debugger-jruby', platforms: ['jruby'] # does not support 1.9.3
+group :debugging do
+  gem 'pry-byebug', group: :development, platforms: ['ruby', 'mingw', 'x64_mingw', 'mswin']
+  # gem 'pry-debugger-jruby', group: :development, platforms: ['jruby'] # does not support 1.9.3
 end
 
 group :development, :test do
