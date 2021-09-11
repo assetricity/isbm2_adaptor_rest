@@ -41,4 +41,4 @@ Gemfile.lock
 # Additional ignores
 bin
 /config/settings.yml
-/.vscode/**
+/.vscode/
