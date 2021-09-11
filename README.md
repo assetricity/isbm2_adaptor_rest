@@ -1,7 +1,7 @@
 # ISBM v2 Adaptor (REST)
 
 [![Build Status](https://app.travis-ci.com/assetricity/isbm2_adaptor_rest.svg?branch=main)](https://app.travis-ci.com/assetricity/isbm2_adaptor_rest)
-[![Coverage Status](https://coveralls.io/repos/assetricity/isbm2_adaptor_rest/badge.svg?branch=main)](https://coveralls.io/r/assetricity/isbm2_adaptor_rest?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/assetricity/isbm2_adaptor_rest/badge.svg?branch=main)](https://coveralls.io/github/assetricity/isbm2_adaptor_rest?branch=main)
 [![Code Climate](https://codeclimate.com/github/assetricity/isbm2_adaptor_rest.svg)](https://codeclimate.com/github/assetricity/isbm2_adaptor_rest)
 [![Dependency Status](https://gemnasium.com/assetricity/isbm2_adaptor_rest.png)](https://gemnasium.com/assetricity/isbm2_adaptor_rest)
 

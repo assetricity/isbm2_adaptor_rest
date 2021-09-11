@@ -18,5 +18,5 @@ group :development, :test do
 end
 
 # Optional dependencies for testing, only if env var COVERAGE=on
-gem 'simplecov', require: false, group: :test
+gem 'simplecov', '~> 0.17.0', require: false, group: :test
 gem 'coveralls', require: false, group: :test
