@@ -33,8 +33,9 @@ It has been generated from the OpenAPI spec of the API using openapi-generator a
   s.add_runtime_dependency 'concurrent-ruby', '~> 1.1', '>= 1.1.5'
   
   # XXX: Short term to not update the following dependencies to preserve 1.9.3 compatibility
- 
-  s.add_development_dependency 'rake', '~> 12.0.0'
+  #      rake relaxed as needs to be < 11.0.1 for 1.9.3 compatibility
+  
+  s.add_development_dependency 'rake'#, '~> 12.0', '>= 12.3.3'
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
   s.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.1'
   s.add_development_dependency 'webmock', '~> 1.24', '>= 1.24.3'

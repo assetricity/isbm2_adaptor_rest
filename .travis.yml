@@ -10,7 +10,12 @@ jdk:
   - openjdk11
   - oraclejdk8
   - oraclejdk11
-matrix:
+jobs:
+  include: 
+    - rvm: 1.9.3
+      jdk: ''
+    - rvm: 2.5
+      jdk: ''
   exclude:
     - rvm: 1.9.3
       jdk: openjdk8
@@ -28,16 +33,20 @@ matrix:
       jdk: openjdk11
     - rvm: 2.5
       jdk: oraclejdk11
-before_script:
-  - cp config/settings.example.yml config/settings.yml
+    - jdk: oraclejdk8
+    - jdk: oraclejdk11
+# before_script:
+  # - cp config/settings.example.yml config/settings.yml
 env:
   - COVERAGE=on
 notifications:
   email:
     recipients:
       - cintegration@assetricity.com
+bundler_args: --without development --with test
 script:
-  - bundle install --path vendor/bundle
+  - bundle config set --local path 'vendor/bundle'
+  - bundle install
   - bundle exec rspec
   - gem build isbm2_adaptor_rest.gemspec
   - gem install ./isbm2_adaptor_rest-2.0.0.gem
