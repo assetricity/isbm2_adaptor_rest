@@ -1,4 +1,4 @@
-#!/env/ruby
+#!/usr/bin/env ruby
 
 require 'isbm2_adaptor_rest'
 
@@ -61,7 +61,7 @@ begin
   raise StandardError '!!Should not have been able to delete the channel twice!!'
 rescue ISBMRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
-  puts "Exception when calling ChannelManagementApi->create_channels: #{e}"
+  puts "Exception when calling ChannelManagementApi->delete_channel: #{e}"
 end
 
 puts "\n*** Retrieving all (accessible) channels."

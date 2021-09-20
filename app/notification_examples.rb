@@ -1,4 +1,4 @@
-#!/env/ruby
+#!/usr/bin/env ruby
 
 require 'isbm2_adaptor_rest'
 require 'rack'
