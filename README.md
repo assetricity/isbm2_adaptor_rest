@@ -3,7 +3,6 @@
 [![Build Status](https://app.travis-ci.com/assetricity/isbm2_adaptor_rest.svg?branch=main)](https://app.travis-ci.com/assetricity/isbm2_adaptor_rest)
 [![Coverage Status](https://coveralls.io/repos/github/assetricity/isbm2_adaptor_rest/badge.svg?branch=main)](https://coveralls.io/github/assetricity/isbm2_adaptor_rest?branch=main)
 [![Code Climate](https://codeclimate.com/github/assetricity/isbm2_adaptor_rest.svg)](https://codeclimate.com/github/assetricity/isbm2_adaptor_rest)
-[![Dependency Status](https://gemnasium.com/assetricity/isbm2_adaptor_rest.png)](https://gemnasium.com/assetricity/isbm2_adaptor_rest)
 
 ISBM v2 Adaptor (REST) provides a Ruby client API for the 
 [OpenO&M ISBM v2 specification REST interface](https://www.openoandm.org/isbm).
@@ -127,6 +126,35 @@ rescue ISBMRestAdaptor::ApiError => e
 end
 
 ```
+
+## Development
+
+The base of the ISBM v2 client adaptor is generated from the official
+OpenO&M OpenAPI specification of the interface definitions. When a new
+version of the schemas are released, generally, the client will be
+regenerated from the new version of the schemas and the changes reviewed.
+
+> Note: the generation process will wipe out some customisations that need
+to be reinstated. Most customisation are marked as such, but care should
+still be taken when reviewing code changes post-regeneration.
+
+To regenerate the base code consistently, run the file:
+
+```shell
+script/generate_ruby_client.sh
+```
+
+The settings are in the file `script/ruby_client_conf.json`, of which only
+the version will generally require modification.
+
+Running the script will generate the main client for the main ISBM services
+plus a client for the Notification service. The latter is generated only for
+the notification specific model classes, the client API itself is not 
+required.
+
+The files will be generated to: `<PROJECT_ROOT>/tmp/client` and 
+`<PROJECT_ROOT>/tmp/notification` for the main client and notification classes,
+respectively.
 
 ## Documentation for API Endpoints
 

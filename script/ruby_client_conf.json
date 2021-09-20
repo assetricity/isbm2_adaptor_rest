@@ -1,0 +1,11 @@
+{
+    "gemName": "isbm2_adaptor_rest",
+    "moduleName": "ISBMRestAdaptor",
+    "gemVersion": "2.0.0",
+    "gemLicense": "MIT",
+    "gemHomepage": "https://github.com/assetricity/isbm2_adaptor_rest",
+    "gemSummary": "Ruby client API for the ISBM v2 specification REST interface.",
+    "gemDescription": "ISBM v2 Adaptor (REST) provides a Ruby client API for the OpenO&M ISBM v2 specification REST interface.\nIt has been generated from the OpenAPI spec of the API using openapi-generator and subsequently tailored.",
+    "gemAuthor": "Assetricity",
+    "gemAuthorEmail": "info@assetricity.com"
+}

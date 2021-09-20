@@ -41,7 +41,7 @@ It has been generated from the OpenAPI spec of the API using openapi-generator a
   s.add_development_dependency 'webmock', '~> 1.24', '>= 1.24.3'
 
   # TODO ensure only desired files are included
-  s.files = Dir['{docs/*,lib/**/*}'] + 
+  s.files = Dir['{docs/*,lib/**/*,schemas/*}'] + 
     %w(CHANGELOG.md config.ru Gemfile isbm2_adaptor_rest.gemspec LICENSE Rakefile README.md)
   s.test_files    = `find spec/*`.split("\n")
   s.executables   = []
