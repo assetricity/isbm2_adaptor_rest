@@ -10,6 +10,10 @@ OpenAPI Generator version: 5.2.0
 
 =end
 
+require 'yaml'
+require 'rspec'
+require 'vcr'
+
 if ENV['COVERAGE'] == 'on'
   require 'simplecov'
   SimpleCov.start
@@ -116,4 +120,10 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/cassettes'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
 end

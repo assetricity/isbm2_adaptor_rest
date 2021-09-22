@@ -1,0 +1,27 @@
+development:
+  endpoints:
+    channel_management: http://simpleisbm.assetricity.com/ChannelManagementService
+    provider_publication: http://simpleisbm.assetricity.com/ProviderPublicationService
+    consumer_publication: http://simpleisbm.assetricity.com/ConsumerPublicationService
+    provider_request: http://simpleisbm.assetricity.com/ProviderRequestService
+    consumer_request: http://simpleisbm.assetricity.com/ConsumerRequestService
+  options:
+    log: false
+    pretty_print: true
+
+test:
+  endpoints:
+    scheme: https
+    host: simpleisbm.assetricity.com # and port if necessary
+    base_path: /rest
+    channel_management: http://simpleisbm.assetricity.com/ChannelManagementService
+    provider_publication: http://simpleisbm.assetricity.com/ProviderPublicationService
+    consumer_publication: http://simpleisbm.assetricity.com/ConsumerPublicationService
+    provider_request: http://simpleisbm.assetricity.com/ProviderRequestService
+    consumer_request: http://simpleisbm.assetricity.com/ConsumerRequestService
+  auth:
+    username: u1
+    password: p1
+  options:
+    log: false
+    pretty_print: true
