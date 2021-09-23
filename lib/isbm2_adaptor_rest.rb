@@ -11,6 +11,7 @@ OpenAPI Generator version: 5.2.0
 =end
 
 # Common files
+require 'active_support/core_ext/object/blank'
 require 'isbm2_adaptor_rest/api_client'
 require 'isbm2_adaptor_rest/api_error'
 require 'isbm2_adaptor_rest/version'
@@ -60,6 +61,8 @@ module ISBMRestAdaptor
   # Hides the require of rack, and rack-contrib, as they are optional dependencies
   autoload :NotificationService, 'isbm2_adaptor_rest/notifications/notification_service'
   autoload :ChannelManagement, 'isbm2_adaptor_rest/ext/channel_management'
+  autoload :ProviderPublication, 'isbm2_adaptor_rest/ext/provider_publication'
+  autoload :ConsumerPublication, 'isbm2_adaptor_rest/ext/consumer_publication'
 
   class << self
     # Customize default settings for the SDK using block.

@@ -1,27 +1,12 @@
 require 'spec_helper'
 
 describe ISBMRestAdaptor::ChannelManagement, :vcr do
-  let(:config) do
-    # Load adaptor test configuration
-    # TODO: should it be a single config file with different environments?
-    #       or separate files named by the environment?
-    ISBMRestAdaptor::Configuration.new do |config|
-      settings = YAML.load_file(File.expand_path('../../config/settings.yml', File.dirname(__FILE__)))['test']
-      config.scheme = settings['endpoints']['scheme']
-      config.host = settings['endpoints']['host']
-      config.base_path = settings['endpoints']['base_path']
-      # Configure HTTP basic authorization: username_password
-      config.username = settings['auth']['username']
-      config.password = settings['auth']['password']
-      # Options...
-    end
-  end
-
+  include_context 'client_config'
   let(:uri) { '/Test' }
   let(:type) { :publication }
   let(:description) { 'description' }
   let(:tokens) { [[:u1, :p1], [:u2, :p2]] }
-  let(:client) { ISBMRestAdaptor::ChannelManagement.new(client_config: config) }
+  let(:client) { ISBMRestAdaptor::ChannelManagement.new(client_config: client_config) }
 
   context 'when invalid arguments' do
     describe '#create_channel' do

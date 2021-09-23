@@ -5,6 +5,7 @@ end
 
 require 'isbm_adaptor_common/version'
 require 'isbm_adaptor_common/channel'
+require 'isbm_adaptor_common/duration'
 require 'isbm_adaptor_common/exceptions'
 
 module IsbmAdaptor

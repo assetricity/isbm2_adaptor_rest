@@ -31,7 +31,9 @@ It has been generated from the OpenAPI spec of the API using openapi-generator a
   
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'concurrent-ruby', '~> 1.1', '>= 1.1.5'
-  
+  s.add_runtime_dependency 'activesupport', '>= 1.0.0'
+  s.add_runtime_dependency 'nokogiri', '~> 1.8.1'
+
   # XXX: Short term to not update the following dependencies to preserve 1.9.3 compatibility
   #      rake relaxed as needs to be < 11.0.1 for 1.9.3 compatibility
   

@@ -1,0 +1,6 @@
+<CCOMData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.mimosa.org/ccom4">
+  <Entity xsi:type="Asset">
+    <UUID>C013C740-19F5-11E1-92B7-6B8E4824019B</UUID>
+  </Entity>
+</CCOMData>
