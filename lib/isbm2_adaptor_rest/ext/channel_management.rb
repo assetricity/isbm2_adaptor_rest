@@ -1,4 +1,5 @@
 require 'isbm_adaptor_common'
+require 'isbm2_adaptor_rest/ext/client_common'
 
 module ISBMRestAdaptor
   # ChannelManagement adaptor implementation that translates the common 
@@ -8,6 +9,7 @@ module ISBMRestAdaptor
   # will be raised if client-side validation is enabled, otherwise a ParameterFault 
   # is raised if the server-side validation fails.
   class ChannelManagement < ChannelManagementApi
+    include ClientCommon
 
     # Creates a new ISBM ChannelManagement client.
     #
@@ -166,10 +168,6 @@ module ISBMRestAdaptor
       channel = Channel.new(uri: uri, channel_type: channel_type, description: description, security_tokens: security_tokens)
       raise ArgumentError, channel.list_invalid_properties.join(', ') if client_side_validation? && !channel.valid?
       channel
-    end
-
-    def client_side_validation?
-      @api_client.config.client_side_validation
     end
   end
 end

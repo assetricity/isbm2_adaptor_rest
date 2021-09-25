@@ -1,3 +1,4 @@
+require 'isbm2_adaptor_rest/ext/client_common'
 require 'isbm_adaptor_common'
 require 'nokogiri'
 require 'yaml'
@@ -10,6 +11,7 @@ module ISBMRestAdaptor
   # will be raised if client-side validation is enabled, otherwise a ParameterFault 
   # is raised if the server-side validation fails.
   class ProviderPublication < ProviderPublicationServiceApi
+    include ClientCommon
 
     # Creates a new ISBM ProviderPublication client.
     #
@@ -79,14 +81,14 @@ module ISBMRestAdaptor
     # ```
     # {
     #  media_type: 'application/xml', 
-    #  content: 'base64', 
+    #  content_encoding: 'base64', 
     #  content: 'PHNvbWVYbWw+VGhpcyBpcyBYTUwgY29udGVudCBpbiBKU09OPC9zb21lWG1sPg=='
     # }
     # ```
     #
     # @param session_id [String] the session id
     # @param content [String|Hash|Object] a valid XML/JSON string, a Hash, or Object that 
-    #   can be serizlied as XML or JSON
+    #   can be serialized as XML or JSON
     # @param topics [Array<String>, String] a collection of topics or single topic
     # @param expiry [Duration] when the message should expire
     # @param options [Hash] optional args and local options (TODO, e.g., auth overrides)
@@ -146,7 +148,7 @@ module ISBMRestAdaptor
     
     def create_message(content, topics, expiry)
       message_content = convert_message_content(content)
-      topics = [topics].flatten.reject(&:'nil?')
+      topics = [topics].flatten.reject(&:'blank?')
       expiry = expiry.blank? ? nil : expiry.to_s
       message = Message.new(message_content: message_content, topics: topics, expiry: expiry)
       raise ArgumentError, message.list_invalid_properties.join(', ') if client_side_validation? && !message.valid?
@@ -170,10 +172,6 @@ module ISBMRestAdaptor
       normalise_content_representation(message_content)
       message_content
     end
-    
-    def client_side_validation?
-      @api_client.config.client_side_validation
-    end
 
     def content_hash?(content)
       return false unless content.is_a?(Hash)
@@ -196,30 +194,11 @@ module ISBMRestAdaptor
       'text/plain'
     end
 
-    def validate_xml(xml)
-      doc = Nokogiri::XML(xml)
-      raise ArgumentError, "XML content is not well formed: #{xml}" unless doc.errors.empty?
-    end
-
-    def validate_json(json)
-      YAML.safe_load(json)
-    rescue Psych::SyntaxError
-      raise ArgumentError, "JSON content is not well formed: #{json}"
-    end
-
     def normalise_content_representation(message_content)
       return if message_content.content_encoding
       return unless media_type_json?(message_content.media_type) && media_type_json?(target_content_type)
       message_content.content = YAML.safe_load(message_content.content) if message_content.content.is_a?(String)
       message_content.media_type = nil
-    end
-
-    def media_type_json?(media_type)
-      media_type =~ %r!(/json|\+json)(\s+;\s+\S+)?\z!
-    end
-
-    def media_type_xml?(media_type)
-      media_type =~ %r!(/xml|\+xml)(\s+;\s+\S+)?\z!
     end
 
     def target_content_type
