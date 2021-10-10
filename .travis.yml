@@ -21,8 +21,8 @@ jobs:
       env: COVERAGE="travis" JRUBY_OPTS="--debug"
   allow_failures:
     - rvm: '3.0'
-# before_script:
-  # - cp config/settings.example.yml config/settings.yml
+before_script:
+  - cp config/settings.example.yml config/settings.yml
 env:
   - COVERAGE="travis"
 notifications:
@@ -35,4 +35,4 @@ script:
   - bundle install
   - bundle exec rspec
   - gem build isbm2_adaptor_rest.gemspec
-  - gem install ./isbm2_adaptor_rest-2.0.0.gem
+  - gem install ./isbm2_adaptor_rest-2.0.1.gem

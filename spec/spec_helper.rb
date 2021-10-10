@@ -12,6 +12,7 @@ OpenAPI Generator version: 5.2.0
 
 require 'yaml'
 require 'rspec'
+require 'webmock/rspec'
 require 'vcr'
 
 if ENV['COVERAGE'] == 'on'
@@ -20,6 +21,14 @@ if ENV['COVERAGE'] == 'on'
 elsif ENV['COVERAGE'] == 'travis'
   require 'coveralls'
   Coveralls.wear!
+
+  # Not sure why, but the Net::Protocol@debug_output is being turned into a Hash
+  # which is causing an error when some debug output is being written to it with '<<'
+  # This is a hacky workaround until we can determine what the real cause is.
+  class Hash
+    def << (*args)
+    end
+  end
 end
 
 # load the gem
@@ -145,6 +154,6 @@ end
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/cassettes'
-  config.hook_into :webmock
+  config.hook_into :webmock, :typhoeus
   config.configure_rspec_metadata!
 end
