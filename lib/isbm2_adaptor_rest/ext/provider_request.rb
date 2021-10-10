@@ -4,16 +4,16 @@ require 'nokogiri'
 require 'yaml'
 
 module ISBMRestAdaptor
-  # ConsumerPublication adaptor implementation that translates the common 
+  # ProviderRequest adaptor implementation that translates the common 
   # interface into the OpenAPI REST implementation.
   # 
   # Where an operation may raise [ArgumentError|ParameterFault], an ArgumentError 
   # will be raised if client-side validation is enabled, otherwise a ParameterFault 
   # is raised if the server-side validation fails.
-  class ConsumerPublication < ConsumerPublicationServiceApi
+  class ProviderRequest < ProviderRequestServiceApi
     include ClientCommon
 
-    # Creates a new ISBM ConsumerPublication client.
+    # Creates a new ISBM ProviderRequest client.
     #
     # The endpoint can be overridden if needing to target multiple ISBM instances 
     # from an application. Otherwise common configuration is preferred as the 
@@ -36,7 +36,8 @@ module ISBMRestAdaptor
       end
     end
 
-    # Opens a subscription session for a channel.
+    # Opens a provider request session for a channel for reading requests and
+    # posting responses.
     #
     # @param uri [String] the channel URI
     # @param topics [Array<String>, String] a collection of topics or single topic
@@ -56,13 +57,13 @@ module ISBMRestAdaptor
     # @return [String] the session id
     # @raise [ArgumentError|ParameterFault] if uri or topics are blank
     # @raise [ChannelFault] if the channel URI does not exist
-    # @raise [OperationFault] if the channel type is not of type 'Publication'
+    # @raise [OperationFault] if the channel type is not of type 'Request'
     # @raise [NamespaceFault] if the same namespace prefix is assigned different namespace names
     # @raise [UnknownFault] if an unknown or unexpected error occurs
-  def open_session(uri, topics, options = {})
-      options = {listener_url: nil, filter_expression: []}.merge(options)
+    def open_session(uri, topics, options = {})
+      options = { listener_url: nil, filter_expression: [] }.merge(options)
       session = create_session(uri, topics, options[:listener_url], options[:filter_expression])
-      data, _status_code, _headers = open_subscription_session_with_http_info(uri, session: session)
+      data, _status_code, _headers = open_provider_request_session_with_http_info(uri, session: session)
       data.session_id
     rescue ApiError => e
       fault_message = YAML.safe_load(e.response_body)['fault']
@@ -76,16 +77,18 @@ module ISBMRestAdaptor
       raise IsbmAdaptor::UnknownFault
     end
 
-    # Reads the first message, if any, in the session queue.
+    # Returns the first request message in the message queue for the session.
+    # Note: this service does not remove the message from the message queue.
     #
     # @param session_id [String] the session id
     # @param options [Hash] optional args and local options (TODO, e.g., auth overrides)
-    # @return [IsbmAdaptor::Message] first message in session queue. nil if no message.
+    # @return [IsbmAdaptor::Message] the first message in the queue for the session.
+    #   nil if no message.
     # @raise [ArgumentError|ParameterFault] if session_id is blank
-    # @raise [SessionFault] if the session id does not exist or is not a publication type
+    # @raise [SessionFault] if the session id does not exist or is not a request type
     # @raise [UnknownFault] if an unknown or unexpected error occurs
-    def read_publication(session_id, options = {})
-      data, _status_code, _headers = read_publication_with_http_info(session_id, options)
+    def read_request(session_id, options = {})
+      data, _status_code, _headers = read_request_with_http_info(session_id, options)
       IsbmAdaptor::Message.new(data.message_id, 
         extract_message_content(data.message_content), 
         data.topics, 
@@ -101,16 +104,16 @@ module ISBMRestAdaptor
       raise IsbmAdaptor::UnknownFault
     end
 
-    # Removes the first message, if any, in the session queue.
+    # Deletes the first request message, if any, in the message queue for the session.
     #
     # @param session_id [String] the session id
     # @param options [Hash] optional args and local options (TODO, e.g., auth overrides)
     # @return [void]
     # @raise [ArgumentError|ParameterFault] if session_id is blank
-    # @raise [SessionFault] if the session id does not exist or is not a publication type
+    # @raise [SessionFault] if the session id does not exist or is not a request type
     # @raise [UnknownFault] if an unknown or unexpected error occurs
-    def remove_publication(session_id, options = {})
-      remove_publication_with_http_info(session_id, options)
+    def remove_request(session_id, options = {})
+      remove_request_with_http_info(session_id, options)
       nil
     rescue ApiError => e
       fault_message = YAML.safe_load(e.response_body)['fault']
@@ -120,7 +123,60 @@ module ISBMRestAdaptor
       raise IsbmAdaptor::UnknownFault
     end
 
-    # Closes a subscription session.
+    # Posts a response message on a channel.
+    #
+    # The message content may be an XML or JSON string, a Hash specifying the
+    # :media_type, :content_encoding (e.g., `base64`), and :content fields, or
+    # an object that will be encoded to XML or JSON with `to_xml` or `to_json`,
+    # respectively.
+    #
+    # The first form will attempt to guess if it is XML or JSON an configure
+    # accordingly; if the type needs to be explicit use the second form.
+    # If client-side validation is enabled, the XML or JSON string will be
+    # validated for syntactic correctness.
+    #
+    # The second form can be used to provide plain text, binary content, etc.
+    # Binary content must already be correctly encoded and the :content_encoding 
+    # field must indicate the encoding used, most likely 'base64'.
+    # If the specified :media_type is an XML or JSON type and it is not an encoded
+    # string, the content will be validated for syntactic corrctness, unless 
+    # client-side validation is disabled.
+    #
+    # If a Hash is provided, the second and third forms are differentiated by
+    # whether the contains only the keys: :media_type, :content_encoding, and
+    # :content. The :content_encoding field is optional.
+    #
+    # ```
+    # {
+    #  media_type: 'application/xml', 
+    #  content_encoding: 'base64', 
+    #  content: 'PHNvbWVYbWw+VGhpcyBpcyBYTUwgY29udGVudCBpbiBKU09OPC9zb21lWG1sPg=='
+    # }
+    # ```
+    #
+    # @param session_id [String] the session id
+    # @param request_message_id [String] the id of the original request message
+    # @param content [String|Hash|Object] a valid XML/JSON string, a Hash, or Object that 
+    #   can be serialized as XML or JSON
+    # @param options [Hash] optional args and local options (TODO, e.g., auth overrides)
+    # @return [String] the response message id (TODO: should this return a Message object?) 
+    # @raise [ArgumentError|ParameterFault] if session_id, request_message_id, or content are 
+    #   blank, or content is not valid XML/JSON
+    # @raise [SessionFault] if the session id does not exist or is not a request type
+    # @raise [UnknownFault] if an unknown or unexpected error occurs
+    def post_response(session_id, request_message_id, content, options = {})
+      message = create_message(content)
+      data, _status_code, _headers = post_response_with_http_info(session_id, request_message_id, message: message)
+      data.message_id
+    rescue ApiError => e
+      fault_message = YAML.safe_load(e.response_body)['fault']
+      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
+      raise IsbmAdaptor::SessionFault, fault_message if e.code == 404
+      raise IsbmAdaptor::SessionFault, fault_message if e.code == 422
+      raise IsbmAdaptor::UnknownFault
+    end
+
+    # Closes a provider request session.
     #
     # @param session_id [String] the session id
     # @param options [Hash] optional args and local options (TODO, e.g., auth overrides)
@@ -132,24 +188,32 @@ module ISBMRestAdaptor
       close_session_with_http_info(session_id, options)
       nil
     rescue ApiError => e
-      fault_message = YAML.safe_load(e.response_body)['fault']
-      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
-      raise IsbmAdaptor::SessionFault, fault_message if e.code == 404
+      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
+      raise IsbmAdaptor::SessionFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
       raise IsbmAdaptor::UnknownFault
     end
 
     private
 
     def create_session(uri, topics, listener_url = nil, filter_expressions = [])
-      validate_presence_of topics, 'Topics' if client_side_validation? # underlying validation does not necessarily catch this
+      # underlying validation does not necessarily catch this
+      validate_presence_of topics, 'Topics' if client_side_validation?
 
       topics = [topics].flatten.reject(&:'blank?')
       listener_url = nil if listener_url.blank?
-      filter_expressions = [filter_expressions].flatten.map {|fe| create_filter_expression(fe) }.reject(&:'nil?')
+      filter_expressions = [filter_expressions].flatten.map { |fe| create_filter_expression(fe) }.reject(&:'nil?')
 
       session = ISBMRestAdaptor::Session.new(topics: topics, listener_url: listener_url, filter_expressions: filter_expressions)
       raise ArgumentError, session.list_invalid_properties.join(', ') if client_side_validation? && !session.valid?
       session
+    end
+
+    def create_message(content)
+      message_content = build_message_content(content)
+      message = Message.new(message_content: message_content)
+      raise ArgumentError, message.list_invalid_properties.join(', ') if client_side_validation? && !message.valid?
+
+      message
     end
   end
 end

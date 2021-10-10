@@ -1,0 +1,366 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://simpleisbm.assetricity.com/rest/channels
+    body:
+      encoding: UTF-8
+      string: '{"uri":"/Test","channelType":"Request"}'
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+      Location:
+      - http://simpleisbm.assetricity.com/rest/channels/%2FTest
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '58'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"uri":"/Test","channelType":"Request","description":null}'
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: post
+    uri: https://simpleisbm.assetricity.com/rest/channels/%2FTest/provider-request-sessions
+    body:
+      encoding: UTF-8
+      string: '{"topics":["topic"],"filterExpressions":[]}'
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+      Location:
+      - http://simpleisbm.assetricity.com/rest/sessions/7e6906f7-ea3c-4580-aa2b-32048c74b597
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '52'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"sessionId":"7e6906f7-ea3c-4580-aa2b-32048c74b597"}'
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: post
+    uri: https://simpleisbm.assetricity.com/rest/channels/%2FTest/consumer-request-sessions
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+      Location:
+      - http://simpleisbm.assetricity.com/rest/sessions/35af38a0-0057-4c2e-a0f9-f2f1b5a4c748
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '52'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"sessionId":"35af38a0-0057-4c2e-a0f9-f2f1b5a4c748"}'
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: post
+    uri: https://simpleisbm.assetricity.com/rest/sessions/35af38a0-0057-4c2e-a0f9-f2f1b5a4c748/requests
+    body:
+      encoding: UTF-8
+      string: '{"messageContent":{"mediaType":"application/xml","contentEncoding":"base64","content":"PHNvbWVYbWw+VGhpcyBpcyBYTUwgY29udGVudCBpbiBKU09OPC9zb21lWG1sPg=="},"topics":["topic"]}'
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+      Location:
+      - http://simpleisbm.assetricity.com/rest/sessions/35af38a0-0057-4c2e-a0f9-f2f1b5a4c748/requests/33d44218-0c1f-42fb-89f2-d2046d102290
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '52'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"messageId":"33d44218-0c1f-42fb-89f2-d2046d102290"}'
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: get
+    uri: https://simpleisbm.assetricity.com/rest/sessions/7e6906f7-ea3c-4580-aa2b-32048c74b597/request
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Simpleisbm-Queued-Messages:
+      - '1'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '224'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"messageId":"33d44218-0c1f-42fb-89f2-d2046d102290","messageContent":{"content":"PHNvbWVYbWw+VGhpcyBpcyBYTUwgY29udGVudCBpbiBKU09OPC9zb21lWG1sPg==","mediaType":"application/xml","contentEncoding":"base64"},"topics":["topic"]}'
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: delete
+    uri: https://simpleisbm.assetricity.com/rest/sessions/7e6906f7-ea3c-4580-aa2b-32048c74b597/request
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 204
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Simpleisbm-Queued-Messages:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: delete
+    uri: https://simpleisbm.assetricity.com/rest/sessions/35af38a0-0057-4c2e-a0f9-f2f1b5a4c748
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 204
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: delete
+    uri: https://simpleisbm.assetricity.com/rest/sessions/7e6906f7-ea3c-4580-aa2b-32048c74b597
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 204
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+- request:
+    method: delete
+    uri: https://simpleisbm.assetricity.com/rest/channels/%2FTest
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 204
+      message: ''
+    headers:
+      Date:
+      - Sun, 10 Oct 2021 06:58:05 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Sun, 10 Oct 2021 06:58:06 GMT
+recorded_with: VCR 3.0.3

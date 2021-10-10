@@ -63,6 +63,8 @@ module ISBMRestAdaptor
   autoload :ChannelManagement, 'isbm2_adaptor_rest/ext/channel_management'
   autoload :ProviderPublication, 'isbm2_adaptor_rest/ext/provider_publication'
   autoload :ConsumerPublication, 'isbm2_adaptor_rest/ext/consumer_publication'
+  autoload :ProviderRequest, 'isbm2_adaptor_rest/ext/provider_request'
+  autoload :ConsumerRequest, 'isbm2_adaptor_rest/ext/consumer_request'
 
   class << self
     # Customize default settings for the SDK using block.

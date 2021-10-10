@@ -29,7 +29,7 @@ module ISBMRestAdaptor
     def initialize(options = {})
       # TODO: customise configuration provided to super(...) from the 'endpoint' and 'options' parameters
       # TODO: what other common configuration items might we want to be able to override here?
-      if config = options[:client_config]
+      if (config = options[:client_config])
         super(ApiClient.new(config))
       else
         super()
@@ -57,7 +57,7 @@ module ISBMRestAdaptor
 
     # Posts a publication message.
     #
-    # The message content may be an XML or JSON string, a Hash specfying the
+    # The message content may be an XML or JSON string, a Hash specifying the
     # :media_type, :content_encoding (e.g., `base64`), and :content fields, or
     # an object that will be encoded to XML or JSON with `to_xml` or `to_json`,
     # respectively.
@@ -147,63 +147,12 @@ module ISBMRestAdaptor
     private
     
     def create_message(content, topics, expiry)
-      message_content = convert_message_content(content)
+      message_content = build_message_content(content)
       topics = [topics].flatten.reject(&:'blank?')
       expiry = expiry.blank? ? nil : expiry.to_s
       message = Message.new(message_content: message_content, topics: topics, expiry: expiry)
       raise ArgumentError, message.list_invalid_properties.join(', ') if client_side_validation? && !message.valid?
       message
-    end
-    
-    def convert_message_content(content)
-      content = {content: content} unless content_hash?(content)
-      message_content = MessageContent.new(content)
-      raise ArgumentError, message_content.list_invalid_properties.join(', ') if client_side_validation? && !message_content.valid?
-      raise ArgumentError, 'Content cannot be missing' if client_side_validation? && message_content.content.blank?
-      return message_content if message_content.content.blank? # shortcut return if client-side validation disabled and nothing to convert
-
-      raise ArgumentError, "Content must be a String, Hash, or an Object responding to :to_xml or :to_json" unless valid_object_type?(message_content.content)
-
-      message_content.media_type = guess_media_type(message_content.content) unless message_content.media_type || message_content.content_encoding
-      if client_side_validation? && !message_content.content_encoding
-        validate_xml(message_content.content) if media_type_xml?(message_content.media_type)
-        validate_json(message_content.content) if media_type_json?(message_content.media_type)
-      end
-      normalise_content_representation(message_content)
-      message_content
-    end
-
-    def content_hash?(content)
-      return false unless content.is_a?(Hash)
-      return false unless (content.keys - [:media_type, :content, :content_encoding]).empty?
-      true
-    end
-
-    def valid_object_type?(content)
-      return true if content.is_a?(String)
-      return true if content.is_a?(Hash)
-      return true if content.respond_to?(:to_xml)
-      return true if content.respond_to?(:to_json) && content.to_json != "\"#{content.to_s}\""
-      false
-    end
-
-    def guess_media_type(content)
-      return nil if content.blank? || !content.is_a?(String)
-      return 'application/xml' if /\A\s*\</ =~ content
-      return 'application/json' if /\A\s*\{/ =~ content
-      'text/plain'
-    end
-
-    def normalise_content_representation(message_content)
-      return if message_content.content_encoding
-      return unless media_type_json?(message_content.media_type) && media_type_json?(target_content_type)
-      message_content.content = YAML.safe_load(message_content.content) if message_content.content.is_a?(String)
-      message_content.media_type = nil
-    end
-
-    def target_content_type
-      # current OpenAPI-based adaptor supports only XML as main Content-Type
-      'application/json'
     end
   end
 end

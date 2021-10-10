@@ -27,7 +27,7 @@ module ISBMRestAdaptor
     def initialize(options = {})
       # TODO: customise configuration provided to super(...) from the 'endpoint' and 'options' parameters
       # TODO: what other common configuration items might we want to be able to override here?
-      if config = options[:client_config]
+      if (config = options[:client_config])
         super(ApiClient.new(config))
       else
         super()

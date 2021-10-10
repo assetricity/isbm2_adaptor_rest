@@ -21,7 +21,7 @@ describe ISBMRestAdaptor::ConsumerPublication, :vcr do
 
       describe 'with filter expression' do
         let(:invalid_filter) { {expression: nil, language: 'XPath', language_version: '1.0'} }
-        let(:invalid_language) { {expression: nil, language: 'XPath', language_version: '1.0'} }
+        let(:invalid_language) { {expression: '/*', language: nil, language_version: '1.0'} }
         let(:invalid_namespaces) {
           { 
             expression: '/*', language: 'XPath', language_version: '1.0',
