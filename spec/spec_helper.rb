@@ -19,9 +19,6 @@ if ENV['COVERAGE'] == 'on'
   require 'simplecov'
   SimpleCov.start
 elsif ENV['COVERAGE'] == 'travis'
-  require 'coveralls'
-  Coveralls.wear!
-
   # Not sure why, but the Net::Protocol@debug_output is being turned into a Hash
   # which is causing an error when some debug output is being written to it with '<<'
   # This is a hacky workaround until we can determine what the real cause is.
@@ -29,6 +26,9 @@ elsif ENV['COVERAGE'] == 'travis'
     def << (*args)
     end
   end
+  
+  require 'coveralls'
+  Coveralls.wear!
 end
 
 # load the gem
