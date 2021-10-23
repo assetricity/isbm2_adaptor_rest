@@ -52,8 +52,9 @@ module ISBMRestAdaptor
       data, _status_code, _headers = create_channel_with_http_info(channel: channel_parameter)
       IsbmAdaptor::Channel.new(data.uri, data.channel_type, data.description)
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::ChannelFault, YAML.safe_load(e.response_body)['fault'] if e.code == 409
+      fault_message = extract_fault_message(e.response_body)
+      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
+      raise IsbmAdaptor::ChannelFault, fault_message if e.code == 409
       raise IsbmAdaptor::UnknownFault
     end
     
@@ -73,9 +74,10 @@ module ISBMRestAdaptor
       add_security_tokens_with_http_info(uri, opts)
       nil
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::ChannelFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
-      raise IsbmAdaptor::OperationFault, YAML.safe_load(e.response_body)['fault'] if e.code == 409
+      fault_message = extract_fault_message(e.response_body)
+      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
+      raise IsbmAdaptor::ChannelFault, fault_message if e.code == 404
+      raise IsbmAdaptor::OperationFault, fault_message if e.code == 409
       raise IsbmAdaptor::UnknownFault
     end
     
@@ -95,9 +97,10 @@ module ISBMRestAdaptor
       remove_security_tokens_with_http_info(uri, opts)
       nil
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::ChannelFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
-      raise IsbmAdaptor::SecurityTokenFault, YAML.safe_load(e.response_body)['fault'] if e.code == 409
+      fault_message = extract_fault_message(e.response_body)
+      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
+      raise IsbmAdaptor::ChannelFault, fault_message if e.code == 404
+      raise IsbmAdaptor::SecurityTokenFault, fault_message if e.code == 409
       raise IsbmAdaptor::UnknownFault
     end
     
@@ -113,8 +116,9 @@ module ISBMRestAdaptor
       delete_channel_with_http_info(uri, options)
       nil
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::ChannelFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
+      fault_message = extract_fault_message(e.response_body)
+      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
+      raise IsbmAdaptor::ChannelFault, fault_message if e.code == 404
       raise IsbmAdaptor::UnknownFault
     end
     
@@ -130,8 +134,9 @@ module ISBMRestAdaptor
       data, _status_code, _headers = get_channel_with_http_info(uri, options)
       IsbmAdaptor::Channel.new(data.uri, data.channel_type, data.description)
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::ChannelFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
+      fault_message = extract_fault_message(e.response_body)
+      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
+      raise IsbmAdaptor::ChannelFault, fault_message if e.code == 404
       raise IsbmAdaptor::UnknownFault
     end
     

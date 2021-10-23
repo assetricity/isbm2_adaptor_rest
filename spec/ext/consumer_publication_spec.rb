@@ -58,7 +58,6 @@ describe ISBMRestAdaptor::ConsumerPublication, :vcr do
       end
 
       it 'raises error with non-existent session id' do
-        skip 'REST path cannot tell difference between no session and no message (both 404 on path)'
         expect { client.read_publication('not_real_session_id') }.to raise_error IsbmAdaptor::SessionFault
       end
     end

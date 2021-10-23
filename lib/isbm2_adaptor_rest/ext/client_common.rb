@@ -2,6 +2,11 @@ require 'nokogiri'
 require 'yaml'
 
 module ISBMRestAdaptor
+  # Module for methods common to the general interface adaptor implementations.
+  # This is included into the adaptor implementations which inherit the generated 
+  # service API classes.
+  #
+  # @see ISBMRestAdaptor::ApplicationApi for common methods for all service API classes.
   module ClientCommon
     def client_side_validation?
       @api_client.config.client_side_validation
@@ -167,6 +172,59 @@ module ISBMRestAdaptor
     def target_content_type
       # current OpenAPI-based adaptor supports only JSON as main Content-Type
       'application/json'
+    end
+
+    # Retrieve the 'fault' message from the message body of an API failure response.
+    # 
+    # @return [String, nil] the 'fault' string, or nil if none present
+    def extract_fault_message(message_body)
+      YAML.safe_load(message_body)['fault']
+    rescue Psych::Exception => e
+      api_client.config.logger.warn('Invalid fault response, possibly invalid ISBM endpoint.')
+      nil
+    end
+
+    # Raise an appropriate exception based on the return HTTP error code for
+    # API operations that access channels; or UnknownFault if the error code 
+    # is not one of the expected codes.
+    def handle_channel_access_api_error(error_code, fault_message)
+      raise IsbmAdaptor::ParameterFault, fault_message if error_code == 400
+      raise IsbmAdaptor::ChannelFault, fault_message if error_code == 404
+      raise IsbmAdaptor::OperationFault, fault_message if error_code == 422
+      raise IsbmAdaptor::UnknownFault
+    end
+
+    # Raise an appropriate exception based on the return HTTP error code for
+    # API operations that access sessions; or UnknownFault if the error code 
+    # is not one of the expected codes.
+    # 
+    # Note: 422 is not relevant to 'close_session' operations, according to the
+    # spec, but is here for reuse across the other API operations that access sessions.
+    def handle_session_access_api_error(error_code, fault_message)
+      raise IsbmAdaptor::ParameterFault, fault_message if error_code == 400
+      raise IsbmAdaptor::SessionFault, fault_message if error_code == 404
+      raise IsbmAdaptor::SessionFault, fault_message if error_code == 422
+      raise IsbmAdaptor::UnknownFault
+    end
+
+    # Raise a namespace fault if the parameter fault is explcitly a namespace fault,
+    # based on the fault string, since the return code from the server cannot differentiate.
+    def check_namespace_error_parameter_fault(session, fault_message)
+      return unless fault_message =~ /namespace/i
+      session.filter_expressions.map(&:namespaces).each { |nms| validate_namespaces(nms) }
+    end
+    
+    # Raise a SessionFault exception if the fault string seems to indicate the session does 
+    # not exist. Returns `nil` otherwise.
+    # 
+    # for REST path, cannot tell difference between no session and no message, so make a guess
+    # Hueristic is if the fault message mentions session but not message then SessionFault,
+    # otherwise assume no message. This should avoid messages like 'no messages for session X'
+    def check_session_fault_message_not_found(fault_message)
+      session_fault = fault_message =~ /session/i && !(fault_message =~ /message/i)
+      raise IsbmAdaptor::SessionFault, fault_message if session_fault
+      
+      return nil
     end
   end
 end

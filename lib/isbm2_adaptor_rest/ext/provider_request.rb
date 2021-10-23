@@ -66,15 +66,10 @@ module ISBMRestAdaptor
       data, _status_code, _headers = open_provider_request_session_with_http_info(uri, session: session)
       data.session_id
     rescue ApiError => e
-      fault_message = YAML.safe_load(e.response_body)['fault']
-      if e.code == 400 && fault_message =~ /namespace/i
-        # Check for NamespaceFault, looks like ParameterFault
-        session.filter_expressions.map(&:namespaces).each { |nms| validate_namespaces(nms) }
-      end
-      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
-      raise IsbmAdaptor::ChannelFault, fault_message if e.code == 404
-      raise IsbmAdaptor::OperationFault, fault_message if e.code == 422
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      # Check for NamespaceFault, looks like ParameterFault
+      check_namespace_error_parameter_fault(session, fault_message) if e.code == 400
+      handle_channel_access_api_error(e.code, fault_message)
     end
 
     # Returns the first request message in the message queue for the session.
@@ -96,12 +91,10 @@ module ISBMRestAdaptor
         data.message_content.content_encoding
       )
     rescue ApiError => e
-      return nil if e.code == 404 # for REST path, cannot tell difference between no session and no message
-      fault_message = YAML.safe_load(e.response_body)['fault']
-      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
-      raise IsbmAdaptor::SessionFault, fault_message if e.code == 404 # for reference
-      raise IsbmAdaptor::SessionFault, fault_message if e.code == 422
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      # for REST path, cannot tell difference between no session and no message, so make a guess
+      return check_session_fault_message_not_found(fault_message) if e.code == 404
+      handle_session_access_api_error(e.code, fault_message)
     end
 
     # Deletes the first request message, if any, in the message queue for the session.
@@ -116,11 +109,8 @@ module ISBMRestAdaptor
       remove_request_with_http_info(session_id, options)
       nil
     rescue ApiError => e
-      fault_message = YAML.safe_load(e.response_body)['fault']
-      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
-      raise IsbmAdaptor::SessionFault, fault_message if e.code == 404
-      raise IsbmAdaptor::SessionFault, fault_message if e.code == 422
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      handle_session_access_api_error(e.code, fault_message)
     end
 
     # Posts a response message on a channel.
@@ -169,11 +159,8 @@ module ISBMRestAdaptor
       data, _status_code, _headers = post_response_with_http_info(session_id, request_message_id, message: message)
       data.message_id
     rescue ApiError => e
-      fault_message = YAML.safe_load(e.response_body)['fault']
-      raise IsbmAdaptor::ParameterFault, fault_message if e.code == 400
-      raise IsbmAdaptor::SessionFault, fault_message if e.code == 404
-      raise IsbmAdaptor::SessionFault, fault_message if e.code == 422
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      handle_session_access_api_error(e.code, fault_message)
     end
 
     # Closes a provider request session.
@@ -188,9 +175,8 @@ module ISBMRestAdaptor
       close_session_with_http_info(session_id, options)
       nil
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::SessionFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      handle_session_access_api_error(e.code, fault_message)
     end
 
     private

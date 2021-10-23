@@ -49,10 +49,8 @@ module ISBMRestAdaptor
       data, _status_code, _headers = open_publication_session_with_http_info(uri, options)
       data.session_id
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::ChannelFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
-      raise IsbmAdaptor::OperationFault, YAML.safe_load(e.response_body)['fault'] if e.code == 422
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      handle_channel_access_api_error(e.code, fault_message)
     end
 
     # Posts a publication message.
@@ -102,10 +100,8 @@ module ISBMRestAdaptor
       data, _status_code, _headers = post_publication_with_http_info(session_id, message: message)
       data.message_id
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::SessionFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
-      raise IsbmAdaptor::SessionFault, YAML.safe_load(e.response_body)['fault'] if e.code == 422
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      handle_session_access_api_error(e.code, fault_message)
     end
 
     # Expires a posted publication message.
@@ -121,10 +117,8 @@ module ISBMRestAdaptor
       expire_publication_with_http_info(session_id, message_id, options)
       nil
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::SessionFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
-      raise IsbmAdaptor::SessionFault, YAML.safe_load(e.response_body)['fault'] if e.code == 422
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      handle_session_access_api_error(e.code, fault_message)
     end
 
     # Closes a publication session.
@@ -139,9 +133,8 @@ module ISBMRestAdaptor
       close_session_with_http_info(session_id, options)
       nil
     rescue ApiError => e
-      raise IsbmAdaptor::ParameterFault, YAML.safe_load(e.response_body)['fault'] if e.code == 400
-      raise IsbmAdaptor::SessionFault, YAML.safe_load(e.response_body)['fault'] if e.code == 404
-      raise IsbmAdaptor::UnknownFault
+      fault_message = extract_fault_message(e.response_body)
+      handle_session_access_api_error(e.code, fault_message)
     end
     
     private
