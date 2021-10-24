@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://simpleisbm.assetricity.com/rest/configuration/security-details
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Sat, 23 Oct 2021 11:17:59 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      WWW-Authenticate:
+      - Basic realm="an ISBM instance"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '228'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"isTLSEnabled":false,"isSecurityTokenRequired":false,"isSecurityTokenEncryptionEnabled":false,"isCertificateRequired":false,"isRBACEnabled":false,"isKeyManagementServiceEnabled":false,"isEndToEndMessageEncryptionEnabled":false}'
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://simpleisbm.assetricity.com/rest/configuration/security-details
+  recorded_at: Sat, 23 Oct 2021 11:17:59 GMT
+recorded_with: VCR 3.0.3

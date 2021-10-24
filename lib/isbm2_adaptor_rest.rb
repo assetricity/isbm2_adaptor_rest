@@ -65,6 +65,7 @@ module ISBMRestAdaptor
   autoload :ConsumerPublication, 'isbm2_adaptor_rest/ext/consumer_publication'
   autoload :ProviderRequest, 'isbm2_adaptor_rest/ext/provider_request'
   autoload :ConsumerRequest, 'isbm2_adaptor_rest/ext/consumer_request'
+  autoload :ConfigurationDiscovery, 'isbm2_adaptor_rest/ext/configuration_discovery'
 
   class << self
     # Customize default settings for the SDK using block.

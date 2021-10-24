@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://simpleisbm.assetricity.com/rest/configuration/security-details
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - OpenAPI-Generator/2.0.1/ruby
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic dTE6cDE=
+      Expect:
+      - ''
+  response:
+    status:
+      code: 401
+      message: ''
+    headers:
+      Date:
+      - Sat, 23 Oct 2021 11:23:32 GMT
+      Server:
+      - Apache/2.4.48 () OpenSSL/1.0.2k-fips
+      WWW-Authenticate:
+      - Basic realm="an ISBM instance"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,POST,PUT,DELETE,HEAD,OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Content-Type,Origin
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '46'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"fault":"Invalid authentication credentials"}'
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://simpleisbm.assetricity.com/rest/configuration/security-details
+  recorded_at: Sat, 23 Oct 2021 11:23:32 GMT
+recorded_with: VCR 3.0.3

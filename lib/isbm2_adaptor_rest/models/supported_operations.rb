@@ -194,7 +194,7 @@ module ISBMRestAdaptor
       end
 
       pattern = Regexp.new(/[-]?P([0-9]+Y)?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+([.][0-9]+)?S)?)?/)
-      if @default_expiry_duration !~ pattern
+      if @default_expiry_duration && @default_expiry_duration !~ pattern
         invalid_properties.push("invalid value for \"default_expiry_duration\", must conform to the pattern #{pattern}.")
       end
 
@@ -219,7 +219,7 @@ module ISBMRestAdaptor
       return false if @is_channel_creation_enabled.nil?
       return false if @is_open_channel_securing_enabled.nil?
       return false if @is_whitelist_required.nil?
-      return false if @default_expiry_duration !~ Regexp.new(/[-]?P([0-9]+Y)?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+([.][0-9]+)?S)?)?/)
+      return false if @default_expiry_duration && @default_expiry_duration !~ Regexp.new(/[-]?P([0-9]+Y)?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+([.][0-9]+)?S)?)?/)
       return false if @additional_information_url.nil?
       true
     end
@@ -246,7 +246,7 @@ module ISBMRestAdaptor
     # @param [Object] default_expiry_duration Value to be assigned
     def default_expiry_duration=(default_expiry_duration)
       pattern = Regexp.new(/[-]?P([0-9]+Y)?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+([.][0-9]+)?S)?)?/)
-      if default_expiry_duration !~ pattern
+      if default_expiry_duration && default_expiry_duration !~ pattern
         fail ArgumentError, "invalid value for \"default_expiry_duration\", must conform to the pattern #{pattern}."
       end
 
