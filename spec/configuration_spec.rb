@@ -12,14 +12,14 @@ OpenAPI Generator version: 5.2.0
 
 require 'spec_helper'
 
-describe ISBMRestAdaptor::Configuration do
-  let(:config) { ISBMRestAdaptor::Configuration.default }
+describe IsbmRestAdaptor::Configuration do
+  let(:config) { IsbmRestAdaptor::Configuration.default }
 
   before(:each) do
     # uncomment below to setup host and base_path
     # require 'URI'
     # uri = URI.parse("http://localhost:80")
-    # ISBMRestAdaptor.configure do |c|
+    # IsbmRestAdaptor.configure do |c|
     #   c.host = uri.host
     #   c.base_path = uri.path
     # end

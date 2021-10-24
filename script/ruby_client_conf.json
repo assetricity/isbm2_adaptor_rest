@@ -1,6 +1,6 @@
 {
     "gemName": "isbm2_adaptor_rest",
-    "moduleName": "ISBMRestAdaptor",
+    "moduleName": "IsbmRestAdaptor",
     "gemVersion": "2.0.0",
     "gemLicense": "MIT",
     "gemHomepage": "https://github.com/assetricity/isbm2_adaptor_rest",

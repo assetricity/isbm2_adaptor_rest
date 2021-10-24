@@ -17,7 +17,7 @@ require "isbm2_adaptor_rest/version"
 
 Gem::Specification.new do |s|
   s.name        = "isbm2_adaptor_rest"
-  s.version     = ISBMRestAdaptor::VERSION
+  s.version     = IsbmRestAdaptor::VERSION
   s.authors     = ["Assetricity"]
   s.email       = ["info@assetricity.com"]
   s.homepage    = "https://github.com/assetricity/isbm2_adaptor_rest"

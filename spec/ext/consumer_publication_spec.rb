@@ -1,6 +1,6 @@
-describe ISBMRestAdaptor::ConsumerPublication, :vcr do
+describe IsbmRestAdaptor::ConsumerPublication, :vcr do
   include_context 'client_config'
-  let(:client) { ISBMRestAdaptor::ConsumerPublication.new(client_config: client_config) }
+  let(:client) { IsbmRestAdaptor::ConsumerPublication.new(client_config: client_config) }
 
   context 'with invalid arguments' do
     describe '#open_session' do
@@ -43,7 +43,7 @@ describe ISBMRestAdaptor::ConsumerPublication, :vcr do
       end
         
       describe 'on channel' do
-        let(:channel_client) { ISBMRestAdaptor::ChannelManagement.new(client_config: client_config) }
+        let(:channel_client) { IsbmRestAdaptor::ChannelManagement.new(client_config: client_config) }
         before { channel_client.create_channel('/TestWrongType', :request) }
         it 'raises error with mismatched channel type' do
           expect { client.open_session('/TestWrongType', topic) }.to raise_error IsbmAdaptor::OperationFault
@@ -87,7 +87,7 @@ describe ISBMRestAdaptor::ConsumerPublication, :vcr do
     let(:uri) { '/Test' }
     let(:type) { :publication }
     let(:topic) { 'topic' }
-    let(:channel_client) { ISBMRestAdaptor::ChannelManagement.new(client_config: client_config) }
+    let(:channel_client) { IsbmRestAdaptor::ChannelManagement.new(client_config: client_config) }
     before { channel_client.create_channel(uri, type) }
 
     let(:filter) { 
@@ -114,7 +114,7 @@ describe ISBMRestAdaptor::ConsumerPublication, :vcr do
     end
 
     context 'with provider' do
-      let(:provider_client) { ISBMRestAdaptor::ProviderPublication.new(client_config: client_config) }
+      let(:provider_client) { IsbmRestAdaptor::ProviderPublication.new(client_config: client_config) }
       let(:provider_session_id) { provider_client.open_session(uri) }
       
       describe '#read_publication (XML content)' do

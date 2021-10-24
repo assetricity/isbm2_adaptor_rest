@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ConsumerPublicationServiceApi
+# IsbmRestAdaptor::ConsumerPublicationServiceApi
 
 All URIs are relative to *http://localhost:80*
 
@@ -24,19 +24,19 @@ Closes a session of any type. All unexpired messages that have been posted durin
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerPublicationServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to be accessed (retrieved, deleted, modified, etc.)
 
 begin
   # Closes a session.
   api_instance.close_session(session_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->close_session: #{e}"
 end
 ```
@@ -54,7 +54,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->close_session_with_http_info: #{e}"
 end
 ```
@@ -91,23 +91,23 @@ Opens a subscription session for a channel.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerPublicationServiceApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 opts = {
-  session: ISBMRestAdaptor::Session.new({session_id: 'session_id_example'}) # Session | The configuration of the subscription session, i.e., topic filtering, content-filtering, and notication listener address. Only the Topics, ListenerURL, and FilterExpressions are to be provided.
+  session: IsbmRestAdaptor::Session.new({session_id: 'session_id_example'}) # Session | The configuration of the subscription session, i.e., topic filtering, content-filtering, and notication listener address. Only the Topics, ListenerURL, and FilterExpressions are to be provided.
 }
 
 begin
   # Opens a subscription session for a channel.
   result = api_instance.open_subscription_session(channel_uri, opts)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->open_subscription_session: #{e}"
 end
 ```
@@ -125,7 +125,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Session>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->open_subscription_session_with_http_info: #{e}"
 end
 ```
@@ -163,20 +163,20 @@ Returns the first non-expired publication message or a previously read expired m
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerPublicationServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the publication was posted.
 
 begin
   # Returns the first non-expired publication message or a previously read expired message that satisfies the session message filters.
   result = api_instance.read_publication(session_id)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->read_publication: #{e}"
 end
 ```
@@ -194,7 +194,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Message>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->read_publication_with_http_info: #{e}"
 end
 ```
@@ -231,19 +231,19 @@ Removes the first, if any, publication message in the subscription queue.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerPublicationServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the publication was posted.
 
 begin
   # Removes the first, if any, publication message in the subscription queue.
   api_instance.remove_publication(session_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->remove_publication: #{e}"
 end
 ```
@@ -261,7 +261,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerPublicationServiceApi->remove_publication_with_http_info: #{e}"
 end
 ```

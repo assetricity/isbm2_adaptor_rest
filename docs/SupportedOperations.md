@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::SupportedOperations
+# IsbmRestAdaptor::SupportedOperations
 
 ## Properties
 
@@ -21,7 +21,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::SupportedOperations.new(
+instance = IsbmRestAdaptor::SupportedOperations.new(
   is_xml_filtering_enabled: null,
   is_json_filtering_enabled: null,
   supported_content_filtering_languages: null,

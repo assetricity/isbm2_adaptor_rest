@@ -23,7 +23,7 @@ This includes setting the default parameter format to `:rack` rather than `nil`
 require 'uri'
 require 'concurrent-ruby'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   class Configuration
     # Defines url scheme
     attr_accessor :scheme

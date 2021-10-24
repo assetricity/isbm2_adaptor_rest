@@ -10,7 +10,7 @@ OpenAPI Generator version: 5.2.0
 
 =end
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   class ApiError < StandardError
     attr_reader :code, :response_headers, :response_body
 

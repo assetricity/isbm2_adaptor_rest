@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::SecurityDetails
+# IsbmRestAdaptor::SecurityDetails
 
 ## Properties
 
@@ -17,7 +17,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::SecurityDetails.new(
+instance = IsbmRestAdaptor::SecurityDetails.new(
   is_tls_enabled: null,
   is_security_token_required: null,
   is_security_token_encryption_enabled: null,

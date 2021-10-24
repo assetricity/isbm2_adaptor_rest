@@ -3,7 +3,7 @@ require 'isbm_adaptor_common'
 require 'nokogiri'
 require 'yaml'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   # ProviderPublication adaptor implementation that translates the common 
   # interface into the OpenAPI REST implementation.
   # 

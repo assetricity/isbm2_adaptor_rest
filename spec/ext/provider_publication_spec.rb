@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe ISBMRestAdaptor::ProviderPublication, :vcr do
+describe IsbmRestAdaptor::ProviderPublication, :vcr do
   include_context 'client_config'
-  let(:client) { ISBMRestAdaptor::ProviderPublication.new(client_config: client_config) }
+  let(:client) { IsbmRestAdaptor::ProviderPublication.new(client_config: client_config) }
 
   context 'with invalid arguments' do
     describe '#open_session' do
@@ -15,7 +15,7 @@ describe ISBMRestAdaptor::ProviderPublication, :vcr do
       end
 
       describe 'on channel' do
-        let(:channel_client) { ISBMRestAdaptor::ChannelManagement.new(client_config: client_config) }
+        let(:channel_client) { IsbmRestAdaptor::ChannelManagement.new(client_config: client_config) }
         before { channel_client.create_channel('/TestWrongType', :request) }
         it 'raises error with mismatched channel type' do
           expect { client.open_session('/TestWrongType') }.to raise_error IsbmAdaptor::OperationFault
@@ -92,7 +92,7 @@ describe ISBMRestAdaptor::ProviderPublication, :vcr do
   context 'with valid arguments' do
     let(:uri) { '/Test' }
     let(:type) { :publication }
-    let(:channel_client) { ISBMRestAdaptor::ChannelManagement.new(client_config: client_config) }
+    let(:channel_client) { IsbmRestAdaptor::ChannelManagement.new(client_config: client_config) }
     before { channel_client.create_channel(uri, type) }
 
     let(:session_id) { client.open_session(uri) }

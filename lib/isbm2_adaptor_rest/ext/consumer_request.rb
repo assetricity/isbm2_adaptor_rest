@@ -3,7 +3,7 @@ require 'isbm_adaptor_common'
 require 'nokogiri'
 require 'yaml'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   # ConsumerRequest adaptor implementation that translates the common 
   # interface into the OpenAPI REST implementation.
   # 
@@ -190,7 +190,7 @@ module ISBMRestAdaptor
     def create_session(uri, listener_url = nil)
       listener_url = nil if listener_url.blank?
 
-      session = ISBMRestAdaptor::Session.new(topics: nil, listener_url: listener_url, filter_expressions: nil)
+      session = IsbmRestAdaptor::Session.new(topics: nil, listener_url: listener_url, filter_expressions: nil)
       raise ArgumentError, session.list_invalid_properties.join(', ') if client_side_validation? && !session.valid?
       session
     end

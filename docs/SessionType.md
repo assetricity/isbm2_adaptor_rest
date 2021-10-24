@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::SessionType
+# IsbmRestAdaptor::SessionType
 
 ## Properties
 
@@ -10,6 +10,6 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::SessionType.new()
+instance = IsbmRestAdaptor::SessionType.new()
 ```
 

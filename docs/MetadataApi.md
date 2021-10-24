@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::MetadataApi
+# IsbmRestAdaptor::MetadataApi
 
 All URIs are relative to *http://localhost:80*
 
@@ -19,13 +19,13 @@ Get metadata from the root of the API
 require 'time'
 require 'isbm2_adaptor_rest'
 
-api_instance = ISBMRestAdaptor::MetadataApi.new
+api_instance = IsbmRestAdaptor::MetadataApi.new
 
 begin
   # Get metadata from the root of the API
   result = api_instance.get_metadata
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling MetadataApi->get_metadata: #{e}"
 end
 ```
@@ -43,7 +43,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Object
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling MetadataApi->get_metadata_with_http_info: #{e}"
 end
 ```

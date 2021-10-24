@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::SessionFault
+# IsbmRestAdaptor::SessionFault
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::SessionFault.new(
+instance = IsbmRestAdaptor::SessionFault.new(
   fault: null
 )
 ```

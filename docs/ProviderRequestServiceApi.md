@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ProviderRequestServiceApi
+# IsbmRestAdaptor::ProviderRequestServiceApi
 
 All URIs are relative to *http://localhost:80*
 
@@ -25,19 +25,19 @@ Closes a session of any type. All unexpired messages that have been posted durin
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to be accessed (retrieved, deleted, modified, etc.)
 
 begin
   # Closes a session.
   api_instance.close_session(session_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->close_session: #{e}"
 end
 ```
@@ -55,7 +55,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->close_session_with_http_info: #{e}"
 end
 ```
@@ -92,23 +92,23 @@ Opens a provider request session for a channel for reading requests and posting 
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderRequestServiceApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 opts = {
-  session: ISBMRestAdaptor::Session.new({session_id: 'session_id_example'}) # Session | The configuration of the session, i.e., topic filtering, content-filtering, and notication listener address. Only the Topics, ListenerURL, and FilterExpressions are to be provided.
+  session: IsbmRestAdaptor::Session.new({session_id: 'session_id_example'}) # Session | The configuration of the session, i.e., topic filtering, content-filtering, and notication listener address. Only the Topics, ListenerURL, and FilterExpressions are to be provided.
 }
 
 begin
   # Opens a provider request session for a channel for reading requests and posting responses.
   result = api_instance.open_provider_request_session(channel_uri, opts)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->open_provider_request_session: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Session>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->open_provider_request_session_with_http_info: #{e}"
 end
 ```
@@ -164,24 +164,24 @@ Posts a response message on a channel.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the message will/is posted.
 request_id = 'request_id_example' # String | The identifier of the origianal request for the response.
 opts = {
-  message: ISBMRestAdaptor::Message.new # Message | The Message to be published. Only MessageContent is allowed in the request body.
+  message: IsbmRestAdaptor::Message.new # Message | The Message to be published. Only MessageContent is allowed in the request body.
 }
 
 begin
   # Posts a response message on a channel.
   result = api_instance.post_response(session_id, request_id, opts)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->post_response: #{e}"
 end
 ```
@@ -199,7 +199,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Message>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->post_response_with_http_info: #{e}"
 end
 ```
@@ -238,20 +238,20 @@ Returns the first non-expired request message or a previously read expired messa
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the request message was posted.
 
 begin
   # Returns the first non-expired request message or a previously read expired message that satisfies the session message filters.
   result = api_instance.read_request(session_id)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->read_request: #{e}"
 end
 ```
@@ -269,7 +269,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Message>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->read_request_with_http_info: #{e}"
 end
 ```
@@ -306,19 +306,19 @@ Deletes the first request message, if any, in the session message queue.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the request message was posted.
 
 begin
   # Deletes the first request message, if any, in the session message queue.
   api_instance.remove_request(session_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->remove_request: #{e}"
 end
 ```
@@ -336,7 +336,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderRequestServiceApi->remove_request_with_http_info: #{e}"
 end
 ```

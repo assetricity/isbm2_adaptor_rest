@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ChannelType
+# IsbmRestAdaptor::ChannelType
 
 ## Properties
 
@@ -10,6 +10,6 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::ChannelType.new()
+instance = IsbmRestAdaptor::ChannelType.new()
 ```
 

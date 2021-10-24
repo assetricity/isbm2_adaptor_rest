@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::SupportedOperationsSupportedAuthentications
+# IsbmRestAdaptor::SupportedOperationsSupportedAuthentications
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::SupportedOperationsSupportedAuthentications.new(
+instance = IsbmRestAdaptor::SupportedOperationsSupportedAuthentications.new(
   soap_supported_token_schemas: null,
   rest_supported_authentication_schemes: null
 )

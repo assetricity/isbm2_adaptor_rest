@@ -1,12 +1,12 @@
 require 'nokogiri'
 require 'yaml'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   # Module for methods common to the general interface adaptor implementations.
   # This is included into the adaptor implementations which inherit the generated 
   # service API classes.
   #
-  # @see ISBMRestAdaptor::ApplicationApi for common methods for all service API classes.
+  # @see IsbmRestAdaptor::ApplicationApi for common methods for all service API classes.
   module ClientCommon
     def client_side_validation?
       @api_client.config.client_side_validation
@@ -82,15 +82,15 @@ module ISBMRestAdaptor
     # @option options [Array<Hash>] :namespaces the hash keys represent
     #   namespace prefixes while their values are namespace names
     def create_filter_expression(options)
-      expression_string = ISBMRestAdaptor::FilterExpressionExpressionString.new(
+      expression_string = IsbmRestAdaptor::FilterExpressionExpressionString.new(
         expression: options[:expression], 
         language: options[:language], 
         language_version: options[:language_version]
       )
       raise ArgumentError, expression_string.list_invalid_properties.join(', ') if client_side_validation? && !expression_string.valid?
 
-      namespaces = [options[:namespaces]].flatten.map { |ns| ns.map { |prefix, name| ISBMRestAdaptor::Namespace.new(prefix: prefix, name: name) }.first }
-      filter_expression = ISBMRestAdaptor::FilterExpression.new(
+      namespaces = [options[:namespaces]].flatten.map { |ns| ns.map { |prefix, name| IsbmRestAdaptor::Namespace.new(prefix: prefix, name: name) }.first }
+      filter_expression = IsbmRestAdaptor::FilterExpression.new(
         expression_string: expression_string, 
         applicable_media_types: options[:applicable_media_types], 
         namespaces: namespaces

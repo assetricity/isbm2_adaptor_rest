@@ -2,10 +2,10 @@
 
 require 'isbm2_adaptor_rest'
 
-UsernameToken = ISBMRestAdaptor::UsernameToken
+UsernameToken = IsbmRestAdaptor::UsernameToken
 
 # Setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   config.scheme = 'http'          # default 'http'
   config.host = 'localhost:3000'  # default 'localhost'
   config.base_path = '/'          # default '/'
@@ -16,10 +16,10 @@ end
 
 ## == ChannelManagement Service to create a couple of channels
 
-channel_management = ISBMRestAdaptor::ChannelManagementApi.new
+channel_management = IsbmRestAdaptor::ChannelManagementApi.new
 
 open_channel_id = '/client/pub/sub/channel'
-open_channel = ISBMRestAdaptor::Channel.new(uri: open_channel_id, 
+open_channel = IsbmRestAdaptor::Channel.new(uri: open_channel_id, 
                            channelType: 'Publication', 
                            description: 'an example channel with no security tokens.')
 
@@ -33,23 +33,23 @@ begin
   response.each do |c|
     puts "    - #{c}"
   end
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
 
 ## Publish/Subscribe examples
 
-publication_service = ISBMRestAdaptor::ProviderPublicationServiceApi.new
-subscription_service = ISBMRestAdaptor::ConsumerPublicationServiceApi.new
+publication_service = IsbmRestAdaptor::ProviderPublicationServiceApi.new
+subscription_service = IsbmRestAdaptor::ConsumerPublicationServiceApi.new
 
 puts "\n*** Opening subscription session"
-subscriber_session = ISBMRestAdaptor::Session.new(topics: ['t1', 't2'])
+subscriber_session = IsbmRestAdaptor::Session.new(topics: ['t1', 't2'])
 begin
   # Open session: respond with session id
   response = subscription_service.open_subscription_session(open_channel.uri, session: subscriber_session)
   puts "Session opened successfully: #{response}"
   subscriber_session.session_id = response.session_id
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling PublicationConsumerApi->open_subscription_session: #{e} => #{e.response_body}"
 end
@@ -62,7 +62,7 @@ begin
   response = publication_service.open_publication_session(open_channel.uri)
   puts "Session opened successfully: #{response}"
   publication_session = response
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling PublicationProviderApi->open_publication_session: #{e} => #{e.response_body}"
 end
@@ -71,7 +71,7 @@ end
 ## Do publish and read
 
 puts "\n*** Publishing to the channel"
-publish_message = ISBMRestAdaptor::MessageMultiPart.new(
+publish_message = IsbmRestAdaptor::MessageMultiPart.new(
   topics: ['t1', 't3'], 
   expiry: 'P1D', 
   message_content: {test: 'this is some content'}
@@ -81,7 +81,7 @@ begin
   response = publication_service.post_publication(publication_session.session_id, publish_message.to_hash)
   puts "Message published successfully: #{response}"
   publish_message = response
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling PublicationProviderApi->post_publication: #{e} => #{e.response_body}"
 end
@@ -94,7 +94,7 @@ end
 #   response = subscription_service.read_publication(subscriber_session.session_id)
 #   puts "Message read successfully: #{response}"
 #   read_message = response
-# rescue ISBMRestAdaptor::ApiError => e
+# rescue IsbmRestAdaptor::ApiError => e
 #   ## TODO: make the errors parse the response
 #   puts "Exception when calling PublicationConsumerApi->read_publication: #{e} => #{e.response_body}"
 # end
@@ -104,7 +104,7 @@ end
 #   # Expire message: respond with no content
 #   publication_service.expire_publication(publication_session.session_id, publish_message.message_id)
 #   puts "Message expired successfully"
-# rescue ISBMRestAdaptor::ApiError => e
+# rescue IsbmRestAdaptor::ApiError => e
 #   ## TODO: make the errors parse the response
 #   puts "Exception when calling PublicationProviderApi->post_publication: #{e} => #{e.response_body}"
 # end
@@ -115,7 +115,7 @@ end
 #     # Remove publication: respond with no content
 #     subscription_service.remove_publication(subscriber_session.session_id)
 #     puts "Message removed successfully"
-#   rescue ISBMRestAdaptor::ApiError => e
+#   rescue IsbmRestAdaptor::ApiError => e
 #     ## TODO: make the errors parse the response
 #     puts "Exception when calling PublicationConsumerApi->remove_publication: #{e} => #{e.response_body}"
 #   end  
@@ -129,7 +129,7 @@ begin
   # Close session: respond with nil
   subscription_service.close_session(subscriber_session.session_id)
   puts "Session closed successfully"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling PublicationConsumerApi->open_subscription_session: #{e} => #{e.response_body}"
 end
@@ -140,7 +140,7 @@ begin
   # Close session: respond with nil
   publication_service.close_session(publication_session.session_id)
   puts "Session closed successfully"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling PublicationProviderApi->close_session: #{e} => #{e.response_body}"
 end
@@ -152,7 +152,7 @@ begin
   # Delete a channel (no response content).
   channel_management.delete_channel(open_channel.uri)
   puts 'Channel deleted successfully'
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end

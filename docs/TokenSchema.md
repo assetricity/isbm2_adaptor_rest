@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::TokenSchema
+# IsbmRestAdaptor::TokenSchema
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::TokenSchema.new(
+instance = IsbmRestAdaptor::TokenSchema.new(
   namespace_name: null,
   schema_location: null
 )

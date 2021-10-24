@@ -13,7 +13,7 @@ OpenAPI Generator version: 5.2.0
 require 'date'
 require 'time'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   class ChannelType
     PUBLICATION = "Publication".freeze
     REQUEST = "Request".freeze

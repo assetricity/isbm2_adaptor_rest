@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::SupportedOperationsSupportedContentFilteringLanguages
+# IsbmRestAdaptor::SupportedOperationsSupportedContentFilteringLanguages
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::SupportedOperationsSupportedContentFilteringLanguages.new(
+instance = IsbmRestAdaptor::SupportedOperationsSupportedContentFilteringLanguages.new(
   content_filtering_languages: null
 )
 ```

@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::Channel
+# IsbmRestAdaptor::Channel
 
 ## Properties
 
@@ -14,7 +14,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::Channel.new(
+instance = IsbmRestAdaptor::Channel.new(
   uri: null,
   channel_type: null,
   description: null,

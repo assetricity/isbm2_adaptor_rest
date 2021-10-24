@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe ISBMRestAdaptor::ChannelManagement, :vcr do
+describe IsbmRestAdaptor::ChannelManagement, :vcr do
   include_context 'client_config'
   let(:uri) { '/Test' }
   let(:type) { :publication }
   let(:description) { 'description' }
   let(:tokens) { [[:u1, :p1], [:u2, :p2]] }
-  let(:client) { ISBMRestAdaptor::ChannelManagement.new(client_config: client_config) }
+  let(:client) { IsbmRestAdaptor::ChannelManagement.new(client_config: client_config) }
 
   context 'when invalid arguments' do
     describe '#create_channel' do

@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::FilterExpressionExpressionString
+# IsbmRestAdaptor::FilterExpressionExpressionString
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::FilterExpressionExpressionString.new(
+instance = IsbmRestAdaptor::FilterExpressionExpressionString.new(
   expression: null,
   language: null,
   language_version: null

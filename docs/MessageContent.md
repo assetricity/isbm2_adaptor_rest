@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::MessageContent
+# IsbmRestAdaptor::MessageContent
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::MessageContent.new(
+instance = IsbmRestAdaptor::MessageContent.new(
   media_type: null,
   content_encoding: null,
   content: null

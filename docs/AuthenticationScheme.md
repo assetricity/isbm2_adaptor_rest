@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::AuthenticationScheme
+# IsbmRestAdaptor::AuthenticationScheme
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::AuthenticationScheme.new(
+instance = IsbmRestAdaptor::AuthenticationScheme.new(
   scheme_name: null,
   scheme_info_url: null
 )

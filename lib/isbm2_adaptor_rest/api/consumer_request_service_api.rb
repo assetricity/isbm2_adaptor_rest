@@ -15,7 +15,7 @@ OpenAPI Generator version: 5.2.0
 
 require 'cgi'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   class ConsumerRequestServiceApi < ApplicationApi
     attr_accessor :api_client
 
@@ -170,7 +170,7 @@ module ISBMRestAdaptor
     # @return [Array<(Session, Integer, Hash)>] Session data, response status code and response headers
     def open_consumer_request_session_with_http_info(channel_uri, opts = {})
       # We ensure there is always an object, as the specification requires it.
-      opts[:session] = ISBMRestAdaptor::Session.new unless opts.has_key? :session
+      opts[:session] = IsbmRestAdaptor::Session.new unless opts.has_key? :session
 
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConsumerRequestServiceApi.open_consumer_request_session ...'

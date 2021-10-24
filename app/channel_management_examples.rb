@@ -2,10 +2,10 @@
 
 require 'isbm2_adaptor_rest'
 
-UsernameToken = ISBMRestAdaptor::UsernameToken
+UsernameToken = IsbmRestAdaptor::UsernameToken
 
 # Setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   config.scheme = 'http'          # default 'http'
   config.host = 'localhost:3000'  # default 'localhost'
   config.base_path = '/'          # default '/'
@@ -17,10 +17,10 @@ end
 ## == ChannelManagement Service
 puts 'Running examples of ChannelManagement API'
 
-channel_management = ISBMRestAdaptor::ChannelManagementApi.new
+channel_management = IsbmRestAdaptor::ChannelManagementApi.new
 
 open_channel_id = '/client/test/open/channel' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
-open_channel = ISBMRestAdaptor::Channel.new(uri: open_channel_id, 
+open_channel = IsbmRestAdaptor::Channel.new(uri: open_channel_id, 
                            channel_type: 'Publication', 
                            description: 'an example channel with no security tokens.')
 
@@ -31,7 +31,7 @@ begin
   response = channel_management.create_channel(channel: open_channel)
   puts "\nRESPONSE: channel info should match what was originally sent"
   puts "    #{response}"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
@@ -42,7 +42,7 @@ begin
   response = channel_management.get_channel(open_channel.uri)
   puts "\nRESPONSE: channel info should match what was originally sent"
   puts "    #{response}"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
@@ -55,7 +55,7 @@ begin
   response.each do |c|
     puts "    #{c}"
   end
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
@@ -77,7 +77,7 @@ begin
   #Adds security tokens to a channel.
   channel_management.add_security_tokens(open_channel.uri, opts)
   puts "Tokens (hash) added successfully"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Server has protection enabled, tokens not added" if e.code == 409
   puts "Exception when calling ChannelManagementApi->add_security_tokens: #{e} => #{e.response_body}" unless e.code == 409
 end
@@ -98,7 +98,7 @@ begin
   #Adds security tokens to a channel.
   channel_management.add_security_tokens(open_channel.uri, opts)
   puts "Token (objects) added successfully"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   server_protection_enabled = e.code == 409
   puts "Server has protection enabled, tokens not added" if e.code == 409
   puts "Exception when calling ChannelManagementApi->add_security_tokens: #{e} => #{e.response_body}" unless e.code == 409
@@ -116,14 +116,14 @@ begin
   channel_management.remove_security_tokens(open_channel.uri, opts)
   puts "Tokens removed successfully" unless server_protection_enabled
   puts "Uexpected success removing tokens when they were not added" if server_protection_enabled
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Server protection enabled, so no tokens to remove" if server_protection_enabled
   puts "Exception when calling ChannelManagementApi->add_security_tokens: #{e} => #{e.response_body}" unless server_protection_enabled
 end
 
 ## Secure channel, i.e., one where security tokens are provided on creation
 secure_channel_id = '/client/test/secure/channel'
-secure_channel = ISBMRestAdaptor::Channel.new(
+secure_channel = IsbmRestAdaptor::Channel.new(
                         uri: secure_channel_id, 
                         channel_type: 'Publication', 
                         description: 'an example channel WITH security tokens.',
@@ -140,7 +140,7 @@ begin
   response = channel_management.create_channel(channel: secure_channel)
   puts "\nRESPONSE: channel info should match what was originally sent excluding the security tokens"
   puts "    #{response}"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
@@ -153,7 +153,7 @@ begin
   response.each do |c|
     puts "    #{c}"
   end
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
@@ -173,7 +173,7 @@ begin
   #Adds security tokens to a channel.
   channel_management.add_security_tokens(secure_channel.uri, opts)
   puts "Tokens added successfully"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Exception when calling ChannelManagementApi->add_security_tokens: #{e} => #{e.response_body}"
 end
 
@@ -188,7 +188,7 @@ begin
   # Removes security tokens from a channel.
   channel_management.remove_security_tokens(secure_channel.uri, opts)
   puts "Tokens removed successfully"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Exception when calling ChannelManagementApi->add_security_tokens: #{e} => #{e.response_body}"
 end
 
@@ -199,7 +199,7 @@ begin
   # Delete a channel (no response content).
   channel_management.delete_channel(open_channel.uri)
   puts 'Channel deleted successfully'
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
@@ -209,7 +209,7 @@ begin
   # Delete a channel (no response content).
   channel_management.delete_channel(secure_channel.uri)
   puts 'Channel deleted successfully'
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end
@@ -221,7 +221,7 @@ begin
   response = channel_management.get_channels()
   puts "\nRESPONSE: should be an empty array"
   puts "    Is empty? #{response.empty?}"
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   ## TODO: make the errors parse the response
   puts "Exception when calling ChannelManagementApi->create_channels: #{e} => #{e.response_body}"
 end

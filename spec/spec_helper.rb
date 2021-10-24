@@ -42,7 +42,7 @@ RSpec.shared_context 'client_config' do
     # Load adaptor test configuration
     # TODO: should it be a single config file with different environments?
     #       or separate files named by the environment?
-    ISBMRestAdaptor::Configuration.new do |config|
+    IsbmRestAdaptor::Configuration.new do |config|
       settings = YAML.load_file(File.expand_path('../config/settings.yml', File.dirname(__FILE__)))['test']
       config.scheme = settings['endpoints']['scheme']
       config.host = settings['endpoints']['host']

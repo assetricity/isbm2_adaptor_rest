@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::Namespace
+# IsbmRestAdaptor::Namespace
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::Namespace.new(
+instance = IsbmRestAdaptor::Namespace.new(
   prefix: null,
   name: null
 )

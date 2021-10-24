@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::Notification
+# IsbmRestAdaptor::Notification
 
 ## Properties
 
@@ -14,7 +14,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::Notification.new(
+instance = IsbmRestAdaptor::Notification.new(
   session_id: null,
   message_id: null,
   topics: null,

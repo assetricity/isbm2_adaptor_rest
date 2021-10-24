@@ -106,13 +106,13 @@ subdirectory.
 require 'isbm2_adaptor_rest'
 
 # Setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR_USERNAME'
   config.password = 'YOUR_PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ChannelManagementApi.new
+api_instance = IsbmRestAdaptor::ChannelManagementApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 opts = {
   security_tokens: [{"username":"user001","password":"password001"},{"username":"someOtherUser","password":"theirPassword"}] # Array<SecurityToken|UsernameToken|Hash> | The SecurityTokens to add.
@@ -121,7 +121,7 @@ opts = {
 begin
   #Adds security tokens to a channel.
   api_instance.add_security_tokens(channel_uri, opts)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Exception when calling ChannelManagementApi->add_security_tokens: #{e}"
 end
 
@@ -162,62 +162,62 @@ All URIs are relative to *http://localhost:80*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ISBMRestAdaptor::ChannelManagementApi* | [**add_security_tokens**](docs/ChannelManagementApi.md#add_security_tokens) | **POST** /channels/{channel-uri}/security-tokens | Adds security tokens to a channel.
-*ISBMRestAdaptor::ChannelManagementApi* | [**create_channel**](docs/ChannelManagementApi.md#create_channel) | **POST** /channels | Create a new channel with the specified URI path fragment.
-*ISBMRestAdaptor::ChannelManagementApi* | [**delete_channel**](docs/ChannelManagementApi.md#delete_channel) | **DELETE** /channels/{channel-uri} | Delete the Channel specified by 'channel-uri'
-*ISBMRestAdaptor::ChannelManagementApi* | [**get_channel**](docs/ChannelManagementApi.md#get_channel) | **GET** /channels/{channel-uri} | Retrieve the Channel identified by 'channel-uri'
-*ISBMRestAdaptor::ChannelManagementApi* | [**get_channels**](docs/ChannelManagementApi.md#get_channels) | **GET** /channels | Retrieve all the channels, subject to security permissions.
-*ISBMRestAdaptor::ChannelManagementApi* | [**remove_security_tokens**](docs/ChannelManagementApi.md#remove_security_tokens) | **DELETE** /channels/{channel-uri}/security-tokens | Removes security tokens from a channel.
-*ISBMRestAdaptor::ConfigurationDiscoveryServiceApi* | [**get_security_details**](docs/ConfigurationDiscoveryServiceApi.md#get_security_details) | **GET** /configuration/security-details | Gets the detailed security related information of the ISBM service provider. The security details are exposed only if the connecting application provides a valid SecurityToken. Each application may be assigned a SecurityToken out-of-band by the service provider.
-*ISBMRestAdaptor::ConfigurationDiscoveryServiceApi* | [**get_supported_operations**](docs/ConfigurationDiscoveryServiceApi.md#get_supported_operations) | **GET** /configuration/supported-operations | Gets information about the supported operations and features of the ISBM service provider. The purpose of this operation is to allow an application to be configured appropriately to communicate successfully with the service provider.
-*ISBMRestAdaptor::ConsumerPublicationServiceApi* | [**close_session**](docs/ConsumerPublicationServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
-*ISBMRestAdaptor::ConsumerPublicationServiceApi* | [**open_subscription_session**](docs/ConsumerPublicationServiceApi.md#open_subscription_session) | **POST** /channels/{channel-uri}/subscription-sessions | Opens a subscription session for a channel.
-*ISBMRestAdaptor::ConsumerPublicationServiceApi* | [**read_publication**](docs/ConsumerPublicationServiceApi.md#read_publication) | **GET** /sessions/{session-id}/publication | Returns the first non-expired publication message or a previously read expired message that satisfies the session message filters.
-*ISBMRestAdaptor::ConsumerPublicationServiceApi* | [**remove_publication**](docs/ConsumerPublicationServiceApi.md#remove_publication) | **DELETE** /sessions/{session-id}/publication | Removes the first, if any, publication message in the subscription queue.
-*ISBMRestAdaptor::ConsumerRequestServiceApi* | [**close_session**](docs/ConsumerRequestServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
-*ISBMRestAdaptor::ConsumerRequestServiceApi* | [**expire_request**](docs/ConsumerRequestServiceApi.md#expire_request) | **DELETE** /sessions/{session-id}/requests/{message-id} | Expires a posted request message.
-*ISBMRestAdaptor::ConsumerRequestServiceApi* | [**open_consumer_request_session**](docs/ConsumerRequestServiceApi.md#open_consumer_request_session) | **POST** /channels/{channel-uri}/consumer-request-sessions | Opens a consumer request session for a channel for posting requests and reading responses.
-*ISBMRestAdaptor::ConsumerRequestServiceApi* | [**post_request**](docs/ConsumerRequestServiceApi.md#post_request) | **POST** /sessions/{session-id}/requests | Posts a request message on a channel.
-*ISBMRestAdaptor::ConsumerRequestServiceApi* | [**read_response**](docs/ConsumerRequestServiceApi.md#read_response) | **GET** /sessions/{session-id}/requests/{request-id}/response | Returns the first response message, if any, in the session message queue associated with the request.
-*ISBMRestAdaptor::ConsumerRequestServiceApi* | [**remove_response**](docs/ConsumerRequestServiceApi.md#remove_response) | **DELETE** /sessions/{session-id}/requests/{request-id}/response | Deletes the first response message, if any, in the session message queue associated with the request.
-*ISBMRestAdaptor::MetadataApi* | [**get_metadata**](docs/MetadataApi.md#get_metadata) | **GET** /api | Get metadata from the root of the API
-*ISBMRestAdaptor::ProviderPublicationServiceApi* | [**close_session**](docs/ProviderPublicationServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
-*ISBMRestAdaptor::ProviderPublicationServiceApi* | [**expire_publication**](docs/ProviderPublicationServiceApi.md#expire_publication) | **DELETE** /sessions/{session-id}/publications/{message-id} | Expires a posted publication.
-*ISBMRestAdaptor::ProviderPublicationServiceApi* | [**open_publication_session**](docs/ProviderPublicationServiceApi.md#open_publication_session) | **POST** /channels/{channel-uri}/publication-sessions | Opens a publication session for a channel.
-*ISBMRestAdaptor::ProviderPublicationServiceApi* | [**post_publication**](docs/ProviderPublicationServiceApi.md#post_publication) | **POST** /sessions/{session-id}/publications | Posts a publication message on a channel.
-*ISBMRestAdaptor::ProviderRequestServiceApi* | [**close_session**](docs/ProviderRequestServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
-*ISBMRestAdaptor::ProviderRequestServiceApi* | [**open_provider_request_session**](docs/ProviderRequestServiceApi.md#open_provider_request_session) | **POST** /channels/{channel-uri}/provider-request-sessions | Opens a provider request session for a channel for reading requests and posting responses.
-*ISBMRestAdaptor::ProviderRequestServiceApi* | [**post_response**](docs/ProviderRequestServiceApi.md#post_response) | **POST** /sessions/{session-id}/requests/{request-id}/responses | Posts a response message on a channel.
-*ISBMRestAdaptor::ProviderRequestServiceApi* | [**read_request**](docs/ProviderRequestServiceApi.md#read_request) | **GET** /sessions/{session-id}/request | Returns the first non-expired request message or a previously read expired message that satisfies the session message filters.
-*ISBMRestAdaptor::ProviderRequestServiceApi* | [**remove_request**](docs/ProviderRequestServiceApi.md#remove_request) | **DELETE** /sessions/{session-id}/request | Deletes the first request message, if any, in the session message queue.
+*IsbmRestAdaptor::ChannelManagementApi* | [**add_security_tokens**](docs/ChannelManagementApi.md#add_security_tokens) | **POST** /channels/{channel-uri}/security-tokens | Adds security tokens to a channel.
+*IsbmRestAdaptor::ChannelManagementApi* | [**create_channel**](docs/ChannelManagementApi.md#create_channel) | **POST** /channels | Create a new channel with the specified URI path fragment.
+*IsbmRestAdaptor::ChannelManagementApi* | [**delete_channel**](docs/ChannelManagementApi.md#delete_channel) | **DELETE** /channels/{channel-uri} | Delete the Channel specified by 'channel-uri'
+*IsbmRestAdaptor::ChannelManagementApi* | [**get_channel**](docs/ChannelManagementApi.md#get_channel) | **GET** /channels/{channel-uri} | Retrieve the Channel identified by 'channel-uri'
+*IsbmRestAdaptor::ChannelManagementApi* | [**get_channels**](docs/ChannelManagementApi.md#get_channels) | **GET** /channels | Retrieve all the channels, subject to security permissions.
+*IsbmRestAdaptor::ChannelManagementApi* | [**remove_security_tokens**](docs/ChannelManagementApi.md#remove_security_tokens) | **DELETE** /channels/{channel-uri}/security-tokens | Removes security tokens from a channel.
+*IsbmRestAdaptor::ConfigurationDiscoveryServiceApi* | [**get_security_details**](docs/ConfigurationDiscoveryServiceApi.md#get_security_details) | **GET** /configuration/security-details | Gets the detailed security related information of the ISBM service provider. The security details are exposed only if the connecting application provides a valid SecurityToken. Each application may be assigned a SecurityToken out-of-band by the service provider.
+*IsbmRestAdaptor::ConfigurationDiscoveryServiceApi* | [**get_supported_operations**](docs/ConfigurationDiscoveryServiceApi.md#get_supported_operations) | **GET** /configuration/supported-operations | Gets information about the supported operations and features of the ISBM service provider. The purpose of this operation is to allow an application to be configured appropriately to communicate successfully with the service provider.
+*IsbmRestAdaptor::ConsumerPublicationServiceApi* | [**close_session**](docs/ConsumerPublicationServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
+*IsbmRestAdaptor::ConsumerPublicationServiceApi* | [**open_subscription_session**](docs/ConsumerPublicationServiceApi.md#open_subscription_session) | **POST** /channels/{channel-uri}/subscription-sessions | Opens a subscription session for a channel.
+*IsbmRestAdaptor::ConsumerPublicationServiceApi* | [**read_publication**](docs/ConsumerPublicationServiceApi.md#read_publication) | **GET** /sessions/{session-id}/publication | Returns the first non-expired publication message or a previously read expired message that satisfies the session message filters.
+*IsbmRestAdaptor::ConsumerPublicationServiceApi* | [**remove_publication**](docs/ConsumerPublicationServiceApi.md#remove_publication) | **DELETE** /sessions/{session-id}/publication | Removes the first, if any, publication message in the subscription queue.
+*IsbmRestAdaptor::ConsumerRequestServiceApi* | [**close_session**](docs/ConsumerRequestServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
+*IsbmRestAdaptor::ConsumerRequestServiceApi* | [**expire_request**](docs/ConsumerRequestServiceApi.md#expire_request) | **DELETE** /sessions/{session-id}/requests/{message-id} | Expires a posted request message.
+*IsbmRestAdaptor::ConsumerRequestServiceApi* | [**open_consumer_request_session**](docs/ConsumerRequestServiceApi.md#open_consumer_request_session) | **POST** /channels/{channel-uri}/consumer-request-sessions | Opens a consumer request session for a channel for posting requests and reading responses.
+*IsbmRestAdaptor::ConsumerRequestServiceApi* | [**post_request**](docs/ConsumerRequestServiceApi.md#post_request) | **POST** /sessions/{session-id}/requests | Posts a request message on a channel.
+*IsbmRestAdaptor::ConsumerRequestServiceApi* | [**read_response**](docs/ConsumerRequestServiceApi.md#read_response) | **GET** /sessions/{session-id}/requests/{request-id}/response | Returns the first response message, if any, in the session message queue associated with the request.
+*IsbmRestAdaptor::ConsumerRequestServiceApi* | [**remove_response**](docs/ConsumerRequestServiceApi.md#remove_response) | **DELETE** /sessions/{session-id}/requests/{request-id}/response | Deletes the first response message, if any, in the session message queue associated with the request.
+*IsbmRestAdaptor::MetadataApi* | [**get_metadata**](docs/MetadataApi.md#get_metadata) | **GET** /api | Get metadata from the root of the API
+*IsbmRestAdaptor::ProviderPublicationServiceApi* | [**close_session**](docs/ProviderPublicationServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
+*IsbmRestAdaptor::ProviderPublicationServiceApi* | [**expire_publication**](docs/ProviderPublicationServiceApi.md#expire_publication) | **DELETE** /sessions/{session-id}/publications/{message-id} | Expires a posted publication.
+*IsbmRestAdaptor::ProviderPublicationServiceApi* | [**open_publication_session**](docs/ProviderPublicationServiceApi.md#open_publication_session) | **POST** /channels/{channel-uri}/publication-sessions | Opens a publication session for a channel.
+*IsbmRestAdaptor::ProviderPublicationServiceApi* | [**post_publication**](docs/ProviderPublicationServiceApi.md#post_publication) | **POST** /sessions/{session-id}/publications | Posts a publication message on a channel.
+*IsbmRestAdaptor::ProviderRequestServiceApi* | [**close_session**](docs/ProviderRequestServiceApi.md#close_session) | **DELETE** /sessions/{session-id} | Closes a session.
+*IsbmRestAdaptor::ProviderRequestServiceApi* | [**open_provider_request_session**](docs/ProviderRequestServiceApi.md#open_provider_request_session) | **POST** /channels/{channel-uri}/provider-request-sessions | Opens a provider request session for a channel for reading requests and posting responses.
+*IsbmRestAdaptor::ProviderRequestServiceApi* | [**post_response**](docs/ProviderRequestServiceApi.md#post_response) | **POST** /sessions/{session-id}/requests/{request-id}/responses | Posts a response message on a channel.
+*IsbmRestAdaptor::ProviderRequestServiceApi* | [**read_request**](docs/ProviderRequestServiceApi.md#read_request) | **GET** /sessions/{session-id}/request | Returns the first non-expired request message or a previously read expired message that satisfies the session message filters.
+*IsbmRestAdaptor::ProviderRequestServiceApi* | [**remove_request**](docs/ProviderRequestServiceApi.md#remove_request) | **DELETE** /sessions/{session-id}/request | Deletes the first request message, if any, in the session message queue.
 
 
 ## Documentation for Models
 
- - [ISBMRestAdaptor::AuthenticationScheme](docs/AuthenticationScheme.md)
- - [ISBMRestAdaptor::Channel](docs/Channel.md)
- - [ISBMRestAdaptor::ChannelFault](docs/ChannelFault.md)
- - [ISBMRestAdaptor::ChannelType](docs/ChannelType.md)
- - [ISBMRestAdaptor::ContentFilteringLanguage](docs/ContentFilteringLanguage.md)
- - [ISBMRestAdaptor::FilterExpression](docs/FilterExpression.md)
- - [ISBMRestAdaptor::FilterExpressionExpressionString](docs/FilterExpressionExpressionString.md)
- - [ISBMRestAdaptor::Message](docs/Message.md)
- - [ISBMRestAdaptor::MessageContent](docs/MessageContent.md)
- - [ISBMRestAdaptor::MessageType](docs/MessageType.md)
- - [ISBMRestAdaptor::Namespace](docs/Namespace.md)
- - [ISBMRestAdaptor::NamespaceFault](docs/NamespaceFault.md)
- - [ISBMRestAdaptor::OperationFault](docs/OperationFault.md)
- - [ISBMRestAdaptor::ParameterFault](docs/ParameterFault.md)
- - [ISBMRestAdaptor::SecurityDetails](docs/SecurityDetails.md)
- - [ISBMRestAdaptor::SecurityTokenFault](docs/SecurityTokenFault.md)
- - [ISBMRestAdaptor::Session](docs/Session.md)
- - [ISBMRestAdaptor::SessionFault](docs/SessionFault.md)
- - [ISBMRestAdaptor::SessionType](docs/SessionType.md)
- - [ISBMRestAdaptor::SupportedOperations](docs/SupportedOperations.md)
- - [ISBMRestAdaptor::SupportedOperationsSupportedAuthentications](docs/SupportedOperationsSupportedAuthentications.md)
- - [ISBMRestAdaptor::SupportedOperationsSupportedContentFilteringLanguages](docs/SupportedOperationsSupportedContentFilteringLanguages.md)
- - [ISBMRestAdaptor::TokenSchema](docs/TokenSchema.md)
- - [ISBMRestAdaptor::UsernameToken](docs/UsernameToken.md)
+ - [IsbmRestAdaptor::AuthenticationScheme](docs/AuthenticationScheme.md)
+ - [IsbmRestAdaptor::Channel](docs/Channel.md)
+ - [IsbmRestAdaptor::ChannelFault](docs/ChannelFault.md)
+ - [IsbmRestAdaptor::ChannelType](docs/ChannelType.md)
+ - [IsbmRestAdaptor::ContentFilteringLanguage](docs/ContentFilteringLanguage.md)
+ - [IsbmRestAdaptor::FilterExpression](docs/FilterExpression.md)
+ - [IsbmRestAdaptor::FilterExpressionExpressionString](docs/FilterExpressionExpressionString.md)
+ - [IsbmRestAdaptor::Message](docs/Message.md)
+ - [IsbmRestAdaptor::MessageContent](docs/MessageContent.md)
+ - [IsbmRestAdaptor::MessageType](docs/MessageType.md)
+ - [IsbmRestAdaptor::Namespace](docs/Namespace.md)
+ - [IsbmRestAdaptor::NamespaceFault](docs/NamespaceFault.md)
+ - [IsbmRestAdaptor::OperationFault](docs/OperationFault.md)
+ - [IsbmRestAdaptor::ParameterFault](docs/ParameterFault.md)
+ - [IsbmRestAdaptor::SecurityDetails](docs/SecurityDetails.md)
+ - [IsbmRestAdaptor::SecurityTokenFault](docs/SecurityTokenFault.md)
+ - [IsbmRestAdaptor::Session](docs/Session.md)
+ - [IsbmRestAdaptor::SessionFault](docs/SessionFault.md)
+ - [IsbmRestAdaptor::SessionType](docs/SessionType.md)
+ - [IsbmRestAdaptor::SupportedOperations](docs/SupportedOperations.md)
+ - [IsbmRestAdaptor::SupportedOperationsSupportedAuthentications](docs/SupportedOperationsSupportedAuthentications.md)
+ - [IsbmRestAdaptor::SupportedOperationsSupportedContentFilteringLanguages](docs/SupportedOperationsSupportedContentFilteringLanguages.md)
+ - [IsbmRestAdaptor::TokenSchema](docs/TokenSchema.md)
+ - [IsbmRestAdaptor::UsernameToken](docs/UsernameToken.md)
 
 
 ## Documentation for Authorization

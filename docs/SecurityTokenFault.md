@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::SecurityTokenFault
+# IsbmRestAdaptor::SecurityTokenFault
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::SecurityTokenFault.new(
+instance = IsbmRestAdaptor::SecurityTokenFault.new(
   fault: null
 )
 ```

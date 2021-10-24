@@ -3,7 +3,7 @@ require 'isbm_adaptor_common'
 require 'nokogiri'
 require 'yaml'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   # ProviderRequest adaptor implementation that translates the common 
   # interface into the OpenAPI REST implementation.
   # 
@@ -189,7 +189,7 @@ module ISBMRestAdaptor
       listener_url = nil if listener_url.blank?
       filter_expressions = [filter_expressions].flatten.map { |fe| create_filter_expression(fe) }.reject(&:'nil?')
 
-      session = ISBMRestAdaptor::Session.new(topics: topics, listener_url: listener_url, filter_expressions: filter_expressions)
+      session = IsbmRestAdaptor::Session.new(topics: topics, listener_url: listener_url, filter_expressions: filter_expressions)
       raise ArgumentError, session.list_invalid_properties.join(', ') if client_side_validation? && !session.valid?
       session
     end

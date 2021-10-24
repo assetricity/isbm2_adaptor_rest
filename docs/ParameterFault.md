@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ParameterFault
+# IsbmRestAdaptor::ParameterFault
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::ParameterFault.new(
+instance = IsbmRestAdaptor::ParameterFault.new(
   fault: null
 )
 ```

@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ConfigurationDiscoveryServiceApi
+# IsbmRestAdaptor::ConfigurationDiscoveryServiceApi
 
 All URIs are relative to *http://localhost:80*
 
@@ -20,19 +20,19 @@ Gets the detailed security related information of the ISBM service provider. The
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConfigurationDiscoveryServiceApi.new
+api_instance = IsbmRestAdaptor::ConfigurationDiscoveryServiceApi.new
 
 begin
   # Gets the detailed security related information of the ISBM service provider. The security details are exposed only if the connecting application provides a valid SecurityToken. Each application may be assigned a SecurityToken out-of-band by the service provider.
   result = api_instance.get_security_details
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConfigurationDiscoveryServiceApi->get_security_details: #{e}"
 end
 ```
@@ -50,7 +50,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SecurityDetails>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConfigurationDiscoveryServiceApi->get_security_details_with_http_info: #{e}"
 end
 ```
@@ -85,13 +85,13 @@ Gets information about the supported operations and features of the ISBM service
 require 'time'
 require 'isbm2_adaptor_rest'
 
-api_instance = ISBMRestAdaptor::ConfigurationDiscoveryServiceApi.new
+api_instance = IsbmRestAdaptor::ConfigurationDiscoveryServiceApi.new
 
 begin
   # Gets information about the supported operations and features of the ISBM service provider. The purpose of this operation is to allow an application to be configured appropriately to communicate successfully with the service provider.
   result = api_instance.get_supported_operations
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConfigurationDiscoveryServiceApi->get_supported_operations: #{e}"
 end
 ```
@@ -109,7 +109,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SupportedOperations>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConfigurationDiscoveryServiceApi->get_supported_operations_with_http_info: #{e}"
 end
 ```

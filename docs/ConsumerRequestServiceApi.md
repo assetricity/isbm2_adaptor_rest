@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ConsumerRequestServiceApi
+# IsbmRestAdaptor::ConsumerRequestServiceApi
 
 All URIs are relative to *http://localhost:80*
 
@@ -26,19 +26,19 @@ Closes a session of any type. All unexpired messages that have been posted durin
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to be accessed (retrieved, deleted, modified, etc.)
 
 begin
   # Closes a session.
   api_instance.close_session(session_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->close_session: #{e}"
 end
 ```
@@ -56,7 +56,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->close_session_with_http_info: #{e}"
 end
 ```
@@ -93,20 +93,20 @@ Expires a posted request message.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the request message was posted.
 message_id = 'message_id_example' # String | The identifier of the posted request.
 
 begin
   # Expires a posted request message.
   api_instance.expire_request(session_id, message_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->expire_request: #{e}"
 end
 ```
@@ -124,7 +124,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->expire_request_with_http_info: #{e}"
 end
 ```
@@ -162,23 +162,23 @@ Opens a consumer request session for a channel for posting requests and reading 
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerRequestServiceApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 opts = {
-  session: ISBMRestAdaptor::Session.new({session_id: 'session_id_example'}) # Session | The configuration of the consumer request session, i.e., optional notication listener address. Only the ListenerURL is to be provided (if desired).
+  session: IsbmRestAdaptor::Session.new({session_id: 'session_id_example'}) # Session | The configuration of the consumer request session, i.e., optional notication listener address. Only the ListenerURL is to be provided (if desired).
 }
 
 begin
   # Opens a consumer request session for a channel for posting requests and reading responses.
   result = api_instance.open_consumer_request_session(channel_uri, opts)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->open_consumer_request_session: #{e}"
 end
 ```
@@ -196,7 +196,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Session>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->open_consumer_request_session_with_http_info: #{e}"
 end
 ```
@@ -234,23 +234,23 @@ Posts a request message on a channel.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the message will/is posted.
 opts = {
-  message: ISBMRestAdaptor::Message.new # Message | The Message to be published Only MessageContent, Topic, and Expiry are allowed in the request body. Although `topics` is an array, at most 1 value is allowed.
+  message: IsbmRestAdaptor::Message.new # Message | The Message to be published Only MessageContent, Topic, and Expiry are allowed in the request body. Although `topics` is an array, at most 1 value is allowed.
 }
 
 begin
   # Posts a request message on a channel.
   result = api_instance.post_request(session_id, opts)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->post_request: #{e}"
 end
 ```
@@ -268,7 +268,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Message>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->post_request_with_http_info: #{e}"
 end
 ```
@@ -306,13 +306,13 @@ Returns the first response message, if any, in the session message queue associa
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session at which the response message was recieved.
 request_id = 'request_id_example' # String | The identifier of the origianal request for the response.
 
@@ -320,7 +320,7 @@ begin
   # Returns the first response message, if any, in the session message queue associated with the request.
   result = api_instance.read_response(session_id, request_id)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->read_response: #{e}"
 end
 ```
@@ -338,7 +338,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Message>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->read_response_with_http_info: #{e}"
 end
 ```
@@ -376,20 +376,20 @@ Deletes the first response message, if any, in the session message queue associa
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ConsumerRequestServiceApi.new
+api_instance = IsbmRestAdaptor::ConsumerRequestServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session at which the response message was recieved.
 request_id = 'request_id_example' # String | The identifier of the origianal request for the response.
 
 begin
   # Deletes the first response message, if any, in the session message queue associated with the request.
   api_instance.remove_response(session_id, request_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->remove_response: #{e}"
 end
 ```
@@ -407,7 +407,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ConsumerRequestServiceApi->remove_response_with_http_info: #{e}"
 end
 ```

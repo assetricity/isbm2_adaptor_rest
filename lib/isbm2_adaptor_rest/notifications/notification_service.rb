@@ -17,7 +17,7 @@ require 'rack'
 require 'rack/contrib'
 # require 'default_notification_service' # TODO move the below into separate files
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   class DefaultNotificationService
 
     def self.start_service(opts = {})
@@ -139,7 +139,7 @@ rescue LoadError => ex
   puts "Unable to load NotificationService as Rack dependencies not available"
   # require 'null_notification_service' # move the below and above into separate files
   
-  module ISBMRestAdaptor
+  module IsbmRestAdaptor
     class NullNotificationService
 
       def self.start_service(opts = {})

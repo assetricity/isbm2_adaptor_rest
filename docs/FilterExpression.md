@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::FilterExpression
+# IsbmRestAdaptor::FilterExpression
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::FilterExpression.new(
+instance = IsbmRestAdaptor::FilterExpression.new(
   applicable_media_types: null,
   expression_string: null,
   namespaces: null

@@ -13,7 +13,7 @@ OpenAPI Generator version: 5.2.0
 require 'date'
 require 'time'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   class Session
     attr_accessor :session_id
 
@@ -62,13 +62,13 @@ module ISBMRestAdaptor
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `ISBMRestAdaptor::Session` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `IsbmRestAdaptor::Session` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `ISBMRestAdaptor::Session`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `IsbmRestAdaptor::Session`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -225,7 +225,7 @@ module ISBMRestAdaptor
         end
       else # model
         # models (e.g. Pet) or oneOf
-        klass = ISBMRestAdaptor.const_get(type)
+        klass = IsbmRestAdaptor.const_get(type)
         klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end

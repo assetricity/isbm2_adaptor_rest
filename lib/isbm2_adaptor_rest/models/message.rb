@@ -13,7 +13,7 @@ OpenAPI Generator version: 5.2.0
 require 'date'
 require 'time'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   # Message Content may be XML, JSON, or possibly an arbitrary type. However, XML and JSON must be supported. When receiving a Message object as the result of a POST, MUST only include the message ID confirming the creation of the Message. The message type is implicit based on the context and MUST NOT appear in request/response bodies.
   class Message
     attr_accessor :message_id
@@ -70,13 +70,13 @@ module ISBMRestAdaptor
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `ISBMRestAdaptor::Message` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `IsbmRestAdaptor::Message` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `ISBMRestAdaptor::Message`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `IsbmRestAdaptor::Message`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -245,7 +245,7 @@ module ISBMRestAdaptor
         end
       else # model
         # models (e.g. Pet) or oneOf
-        klass = ISBMRestAdaptor.const_get(type)
+        klass = IsbmRestAdaptor.const_get(type)
         klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end

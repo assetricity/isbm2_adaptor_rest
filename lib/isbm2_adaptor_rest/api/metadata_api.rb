@@ -12,7 +12,7 @@ OpenAPI Generator version: 5.2.0
 
 require 'cgi'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   class MetadataApi < ApplicationApi
     attr_accessor :api_client
 

@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::UsernameToken
+# IsbmRestAdaptor::UsernameToken
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::UsernameToken.new(
+instance = IsbmRestAdaptor::UsernameToken.new(
   username: null,
   password: null
 )

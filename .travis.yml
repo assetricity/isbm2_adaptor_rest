@@ -35,4 +35,4 @@ script:
   - bundle install
   - bundle exec rspec
   - gem build isbm2_adaptor_rest.gemspec
-  - gem install ./isbm2_adaptor_rest-2.0.1.gem
+  - gem install ./isbm2_adaptor_rest-2.0.1.b1.gem

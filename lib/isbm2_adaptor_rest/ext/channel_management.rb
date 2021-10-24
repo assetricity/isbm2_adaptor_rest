@@ -1,7 +1,7 @@
 require 'isbm_adaptor_common'
 require 'isbm2_adaptor_rest/ext/client_common'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   # ChannelManagement adaptor implementation that translates the common 
   # interface into the OpenAPI REST implementation.
   # 

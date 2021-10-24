@@ -47,7 +47,7 @@ map '/notifications' do
     JSON.parse(body, symbolize_names: true, create_additions: false)
   end
 
-  run ISBMRestAdaptor::NotificationService.new
+  run IsbmRestAdaptor::NotificationService.new
 end
 
 run Rack::NotFound.new

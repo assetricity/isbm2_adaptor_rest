@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ChannelManagementApi
+# IsbmRestAdaptor::ChannelManagementApi
 
 All URIs are relative to *http://localhost:80*
 
@@ -24,13 +24,13 @@ Adds security tokens to a channel.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ChannelManagementApi.new
+api_instance = IsbmRestAdaptor::ChannelManagementApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 opts = {
   security_tokens: [{"username":"user001","password":"password001"},{"username":"someOtherUser","password":"theirPassword"}] # Array<SecurityToken|UsernameToken|Hash> | The SecurityTokens to add.
@@ -39,7 +39,7 @@ opts = {
 begin
   # Adds security tokens to a channel.
   api_instance.add_security_tokens(channel_uri, opts)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->add_security_tokens: #{e}"
 end
 ```
@@ -57,7 +57,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->add_security_tokens_with_http_info: #{e}"
 end
 ```
@@ -95,16 +95,16 @@ Create a new channel with the specified URI path fragment.
 require 'time'
 require 'isbm2_adaptor_rest'
 
-api_instance = ISBMRestAdaptor::ChannelManagementApi.new
+api_instance = IsbmRestAdaptor::ChannelManagementApi.new
 opts = {
-  channel: ISBMRestAdaptor::Channel.new({uri: 'uri_example', channel_type: ISBMRestAdaptor::ChannelType::PUBLICATION}) # Channel | The Channel to create
+  channel: IsbmRestAdaptor::Channel.new({uri: 'uri_example', channel_type: IsbmRestAdaptor::ChannelType::PUBLICATION}) # Channel | The Channel to create
 }
 
 begin
   # Create a new channel with the specified URI path fragment.
   result = api_instance.create_channel(opts)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->create_channel: #{e}"
 end
 ```
@@ -122,7 +122,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Channel>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->create_channel_with_http_info: #{e}"
 end
 ```
@@ -159,19 +159,19 @@ Delete the Channel specified by 'channel-uri'
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ChannelManagementApi.new
+api_instance = IsbmRestAdaptor::ChannelManagementApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 
 begin
   # Delete the Channel specified by 'channel-uri'
   api_instance.delete_channel(channel_uri)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->delete_channel: #{e}"
 end
 ```
@@ -189,7 +189,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->delete_channel_with_http_info: #{e}"
 end
 ```
@@ -226,20 +226,20 @@ Retrieve the Channel identified by 'channel-uri'
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ChannelManagementApi.new
+api_instance = IsbmRestAdaptor::ChannelManagementApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 
 begin
   # Retrieve the Channel identified by 'channel-uri'
   result = api_instance.get_channel(channel_uri)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->get_channel: #{e}"
 end
 ```
@@ -257,7 +257,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Channel>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->get_channel_with_http_info: #{e}"
 end
 ```
@@ -294,19 +294,19 @@ Retrieve all the channels, subject to security permissions.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ChannelManagementApi.new
+api_instance = IsbmRestAdaptor::ChannelManagementApi.new
 
 begin
   # Retrieve all the channels, subject to security permissions.
   result = api_instance.get_channels
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->get_channels: #{e}"
 end
 ```
@@ -324,7 +324,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Channel>>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->get_channels_with_http_info: #{e}"
 end
 ```
@@ -359,13 +359,13 @@ Removes security tokens from a channel.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ChannelManagementApi.new
+api_instance = IsbmRestAdaptor::ChannelManagementApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 opts = {
   security_tokens: [{"username":"user001","password":"password001"},{"username":"someOtherUser","password":"theirPassword"}] # Array<SecurityToken|UsernameToken|Hash> | The security tokens to remove: each token must be specified in full to be removed, i.e., specifying only the username of a UsernamePassword token is insufficient.
@@ -374,7 +374,7 @@ opts = {
 begin
   # Removes security tokens from a channel.
   api_instance.remove_security_tokens(channel_uri, opts)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->remove_security_tokens: #{e}"
 end
 ```
@@ -392,7 +392,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ChannelManagementApi->remove_security_tokens_with_http_info: #{e}"
 end
 ```

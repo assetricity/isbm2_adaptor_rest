@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::NamespaceFault
+# IsbmRestAdaptor::NamespaceFault
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::NamespaceFault.new(
+instance = IsbmRestAdaptor::NamespaceFault.new(
   fault: null
 )
 ```

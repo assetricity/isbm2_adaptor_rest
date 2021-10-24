@@ -11,7 +11,7 @@ This is a helper class for the Notification Service and is not generated from th
 
 require 'concurrent-ruby'
 
-module ISBMRestAdaptor
+module IsbmRestAdaptor
   # Records open sessions to allow the Notification Service to take appropriate actions.
   # Provides a simple interface to add, remove, and retrieve Sessions.
   #

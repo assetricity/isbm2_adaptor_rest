@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe ISBMRestAdaptor::ConfigurationDiscovery, :vcr do
+describe IsbmRestAdaptor::ConfigurationDiscovery, :vcr do
   include_context 'client_config'
-  let(:client) { ISBMRestAdaptor::ConfigurationDiscovery.new(client_config: client_config) }
+  let(:client) { IsbmRestAdaptor::ConfigurationDiscovery.new(client_config: client_config) }
 
   context 'when security token is valid' do
     describe '#get_security_details' do

@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::Message
+# IsbmRestAdaptor::Message
 
 ## Properties
 
@@ -16,7 +16,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::Message.new(
+instance = IsbmRestAdaptor::Message.new(
   message_id: null,
   message_type: null,
   message_content: null,

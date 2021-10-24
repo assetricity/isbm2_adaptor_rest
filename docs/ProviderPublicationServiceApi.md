@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ProviderPublicationServiceApi
+# IsbmRestAdaptor::ProviderPublicationServiceApi
 
 All URIs are relative to *http://localhost:80*
 
@@ -24,19 +24,19 @@ Closes a session of any type. All unexpired messages that have been posted durin
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderPublicationServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to be accessed (retrieved, deleted, modified, etc.)
 
 begin
   # Closes a session.
   api_instance.close_session(session_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->close_session: #{e}"
 end
 ```
@@ -54,7 +54,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->close_session_with_http_info: #{e}"
 end
 ```
@@ -91,20 +91,20 @@ Expires a posted publication.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderPublicationServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the publication was posted.
 message_id = 'message_id_example' # String | The identifier of the posted publication.
 
 begin
   # Expires a posted publication.
   api_instance.expire_publication(session_id, message_id)
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->expire_publication: #{e}"
 end
 ```
@@ -122,7 +122,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->expire_publication_with_http_info: #{e}"
 end
 ```
@@ -160,20 +160,20 @@ Opens a publication session for a channel.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderPublicationServiceApi.new
 channel_uri = 'channel_uri_example' # String | The identifier of the channel to be accessed (retrieved, deleted, modified, etc.)
 
 begin
   # Opens a publication session for a channel.
   result = api_instance.open_publication_session(channel_uri)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->open_publication_session: #{e}"
 end
 ```
@@ -191,7 +191,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Session>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->open_publication_session_with_http_info: #{e}"
 end
 ```
@@ -228,23 +228,23 @@ Posts a publication message on a channel.
 require 'time'
 require 'isbm2_adaptor_rest'
 # setup authorization
-ISBMRestAdaptor.configure do |config|
+IsbmRestAdaptor.configure do |config|
   # Configure HTTP basic authorization: username_password
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ISBMRestAdaptor::ProviderPublicationServiceApi.new
+api_instance = IsbmRestAdaptor::ProviderPublicationServiceApi.new
 session_id = 'session_id_example' # String | The identifier of the session to which the message will be posted.
 opts = {
-  message: ISBMRestAdaptor::Message.new # Message | The Message to be published Only MessageContent, Topic, and Expiry are allowed in the request body.
+  message: IsbmRestAdaptor::Message.new # Message | The Message to be published Only MessageContent, Topic, and Expiry are allowed in the request body.
 }
 
 begin
   # Posts a publication message on a channel.
   result = api_instance.post_publication(session_id, opts)
   p result
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->post_publication: #{e}"
 end
 ```
@@ -262,7 +262,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Message>
-rescue ISBMRestAdaptor::ApiError => e
+rescue IsbmRestAdaptor::ApiError => e
   puts "Error when calling ProviderPublicationServiceApi->post_publication_with_http_info: #{e}"
 end
 ```

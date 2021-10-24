@@ -1,4 +1,4 @@
-# ISBMRestAdaptor::ChannelFault
+# IsbmRestAdaptor::ChannelFault
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'isbm2_adaptor_rest'
 
-instance = ISBMRestAdaptor::ChannelFault.new(
+instance = IsbmRestAdaptor::ChannelFault.new(
   fault: null
 )
 ```
