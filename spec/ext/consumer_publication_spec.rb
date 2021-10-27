@@ -149,7 +149,7 @@ describe IsbmRestAdaptor::ConsumerPublication, :vcr do
       end
 
       describe '#read_publication (JSON content)' do
-        let(:content) { {ccomData: [{entity: {'@@type': 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
+        let(:content) { {ccomData: [{entity: {:'@@type' => 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
         before { provider_client.post_publication(provider_session_id, content, topic) }
 
         let(:message) { client.read_publication(consumer_session_id) }

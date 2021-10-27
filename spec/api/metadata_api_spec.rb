@@ -38,15 +38,16 @@ describe 'MetadataApi', :vcr do
   # @param [Hash] opts the optional parameters
   # @return [String]
   describe 'get_metadata test' do
+    # v1.9.3 does not recognize the symbolize_names parameter
     let(:expected_metadata) { YAML.safe_load(File.read(File.expand_path('../../schemas/isbm_complete.yml', File.dirname(__FILE__))), symbolize_names: true) }
     let(:api_metadata) { @instance.get_metadata }
 
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      expect(api_metadata[:info].to_json).to eq(expected_metadata[:info].to_json)
-      expect(api_metadata[:tags].to_json).to eq(expected_metadata[:tags].to_json)
-      expect(api_metadata[:paths].to_json).to eq(expected_metadata[:paths].to_json)
-      expect(api_metadata[:components].to_json).to eq(expected_metadata[:components].to_json)
+      expect(api_metadata[:info].to_json).to eq((expected_metadata[:info]||expected_metadata['info']).to_json)
+      expect(api_metadata[:tags].to_json).to eq((expected_metadata[:tags]||expected_metadata['tags']).to_json)
+      expect(api_metadata[:paths].to_json).to eq((expected_metadata[:paths]||expected_metadata['paths']).to_json)
+      expect(api_metadata[:components].to_json).to eq((expected_metadata[:components]||expected_metadata['components']).to_json)
 
       # Servers and security may differ for a specific ISBM implementation
       # expect(api_metadata[:servers].to_json).to eq(expected_metadata[:servers].to_json)

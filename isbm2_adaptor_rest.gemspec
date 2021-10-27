@@ -28,11 +28,13 @@ It has been generated from the OpenAPI spec of the API using openapi-generator a
   s.required_ruby_version = ">= 1.9.3"
 
   # XXX: Short term to not update the following dependencies to preserve 1.9.3 compatibility
+  # Note: ffi (needed by ethon and typhoeus) does not work on Java 11, must be Java 8.
   
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'concurrent-ruby', '~> 1.1', '>= 1.1.5'
   s.add_runtime_dependency 'activesupport', '>= 1.0.0'
   s.add_runtime_dependency 'nokogiri', '~> 1.8.1'
+  s.add_runtime_dependency 'json', '<= 2.2.0'
 
   # XXX: Short term to not update the following dependencies to preserve 1.9.3 compatibility
   #      rake relaxed as needs to be < 11.0.1 for 1.9.3 compatibility
@@ -41,6 +43,7 @@ It has been generated from the OpenAPI spec of the API using openapi-generator a
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
   s.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.1'
   s.add_development_dependency 'webmock', '~> 1.24', '>= 1.24.3'
+  s.add_development_dependency 'crack', '< 0.4.5' # webmock dependency: 0.4.5 requires rexml which is non 1.9.3 compat
 
   # TODO ensure only desired files are included
   s.files = Dir['{docs/*,lib/**/*,schemas/*}'] + 

@@ -144,7 +144,7 @@ describe IsbmRestAdaptor::ConsumerRequest, :vcr do
 
     describe '#post_request' do
       let(:content) { File.read(File.expand_path('../fixtures/ccom.xml', File.dirname(__FILE__))) }
-      let(:json_content) { {ccomData: [{entity: {'@@type': 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
+      let(:json_content) { {ccomData: [{entity: {:'@@type' => 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
       let(:json_string) { "{\"ccomData\":[{\"entity\":{\"@@type\":\"Asset\",\"uuid\":\"C013C740-19F5-11E1-92B7-6B8E4824019B\"}}]}" }
       let(:string_content) { 'plain text string' }
       let(:binary_content) { 
@@ -223,7 +223,7 @@ describe IsbmRestAdaptor::ConsumerRequest, :vcr do
       end
 
       describe '#read_response (JSON content)' do
-        let(:content) { {ccomData: [{entity: {'@@type': 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
+        let(:content) { {ccomData: [{entity: {:'@@type' => 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
         before { provider_request_client.post_response(provider_session_id, request_message_id, content) }
 
         let(:response) { client.read_response(consumer_session_id, request_message_id) }

@@ -167,7 +167,7 @@ describe IsbmRestAdaptor::ProviderRequest, :vcr do
         end
 
         describe '#post_response' do
-          let(:json_content) { {ccomData: [{entity: {'@@type': 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
+          let(:json_content) { {ccomData: [{entity: {:'@@type' => 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
           let(:json_string) { "{\"ccomData\":[{\"entity\":{\"@@type\":\"Asset\",\"uuid\":\"C013C740-19F5-11E1-92B7-6B8E4824019B\"}}]}" }
           let(:string_content) { 'plain text string' }
           let(:binary_content) { 
@@ -198,7 +198,7 @@ describe IsbmRestAdaptor::ProviderRequest, :vcr do
       end
 
       describe '#read_request (JSON content)' do
-        let(:content) { {ccomData: [{entity: {'@@type': 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
+        let(:content) { {ccomData: [{entity: {:'@@type' => 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
         before { consumer_client.post_request(consumer_session_id, content, topic) }
 
         let(:request) { client.read_request(provider_session_id) }

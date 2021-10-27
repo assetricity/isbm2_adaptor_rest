@@ -198,7 +198,7 @@ module IsbmRestAdaptor
           # The equality checks catch many cases where the deserialisation does not 
           # actually change the object or the type from the orginal deserialisation of JSON
           # Not worrying about Array<> or Hash<>, since we know we do not have them.
-          new_value == value or (%i(Boolean Time Date).include? t and new_value.is_a? Kernel.const_get(t))
+          new_value == value or (%w(Boolean Time Date).map(&:to_sym).include? t and new_value.is_a? Kernel.const_get(t))
         end
         new_value if matched_type
       else # model

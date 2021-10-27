@@ -110,7 +110,7 @@ describe IsbmRestAdaptor::ProviderPublication, :vcr do
       let(:message_id) { client.post_publication(session_id, content, topic) }
       
       describe '#post_publication' do
-        let(:json_content) { {ccomData: [{entity: {'@@type': 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
+        let(:json_content) { {ccomData: [{entity: {:'@@type' => 'Asset', uuid: 'C013C740-19F5-11E1-92B7-6B8E4824019B'}}]} }
         let(:json_string) { "{\"ccomData\":[{\"entity\":{\"@@type\":\"Asset\",\"uuid\":\"C013C740-19F5-11E1-92B7-6B8E4824019B\"}}]}" }
         let(:string_content) { 'plain text string' }
         let(:binary_content) { 
