@@ -46,6 +46,7 @@ module IsbmRestAdaptor
     # @param xml [String] the XML string to parse
     # @return [void]
     def validate_xml(xml)
+      return unless xml.is_a?(String)
       doc = Nokogiri::XML(xml)
       raise ArgumentError, "XML content is not well formed: #{xml}" unless doc.errors.empty?
     end
@@ -56,7 +57,7 @@ module IsbmRestAdaptor
     # @param xml [String] the JSON string to parse
     # @return [void]
     def validate_json(json)
-      YAML.safe_load(json)
+      YAML.safe_load(json) if json.is_a?(String)
     rescue Psych::SyntaxError
       raise ArgumentError, "JSON content is not well formed: #{json}"
     end
@@ -124,7 +125,7 @@ module IsbmRestAdaptor
 
       raise ArgumentError, "Content must be a String, Hash, or an Object responding to :to_xml or :to_json" unless valid_object_type?(message_content.content)
 
-      message_content.media_type = guess_media_type(message_content.content) unless message_content.media_type || message_content.content_encoding
+      message_content.media_type ||= guess_media_type(message_content.content) unless message_content.content_encoding
       if client_side_validation? && !message_content.content_encoding
         validate_xml(message_content.content) if media_type_xml?(message_content.media_type)
         validate_json(message_content.content) if media_type_json?(message_content.media_type)
@@ -156,6 +157,8 @@ module IsbmRestAdaptor
     end
 
     def guess_media_type(content)
+      return 'application/json' if content.is_a?(Hash)
+      return 'application/xml' if content.is_a?(Nokogiri::XML::Node)
       return nil if content.blank? || !content.is_a?(String)
       return 'application/xml' if /\A\s*\</ =~ content
       return 'application/json' if /\A\s*\{/ =~ content
