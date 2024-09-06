@@ -11,8 +11,8 @@ OpenAPI Generator version: 5.2.0
 =end
 
 =begin
-The Configuration class has been extended over that which was generated to 
-provide access to a session register and shared callbacks for the 
+The Configuration class has been extended over that which was generated to
+provide access to a session register and shared callbacks for the
 Notification Service.
 
 This includes setting the default parameter format to `:rack` rather than `nil`
@@ -20,8 +20,9 @@ This includes setting the default parameter format to `:rack` rather than `nil`
 @see session_register, notification_service_callbacks
 =end
 
-require 'uri'
+require 'cgi'
 require 'concurrent-ruby'
+require 'addressable/uri'
 
 module IsbmRestAdaptor
   class Configuration
@@ -155,10 +156,10 @@ module IsbmRestAdaptor
     # The register to use for tracking open sessions, particularly for supporting the Notification Service.
     # Default to TransientSessionRegister (no persistence)
     #
-    # If the Notification Service is not being used and recording of open sessions is not required, 
+    # If the Notification Service is not being used and recording of open sessions is not required,
     # this can be disabled by providing an instance of NullSessionRegister.
     # @note if a NullSessionRegister is used, the NotificationService will be effectively disabled
-    # even if it is running. 
+    # even if it is running.
     attr_accessor :session_register
 
     ### Notification Service setting: callbacks
@@ -242,7 +243,7 @@ module IsbmRestAdaptor
       url = "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '') if index == nil
 
       url ||= server_url(index, server_operation_variables.fetch(operation, server_variables), operation_server_settings[operation])
-      URI.encode(url)
+      Addressable::URI.encode(url)
     end
 
     # Gets API key (with prefix if set).
@@ -347,9 +348,9 @@ module IsbmRestAdaptor
     end
 
     # Adds a callback for the specified SessionType and name (defaults to :default).
-    # 
+    #
     # The callback object must take 2 arguments, the Notification and the Session
-    # 
+    #
     # @param [SessionType] session_type
     # @param [String/Symbol] name (optional), defaults to :default
     # @block the code to execute for the callback
