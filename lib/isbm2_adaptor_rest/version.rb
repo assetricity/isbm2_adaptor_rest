@@ -11,5 +11,5 @@ OpenAPI Generator version: 5.2.0
 =end
 
 module IsbmRestAdaptor
-  VERSION = '2.0.1.b1'
+  VERSION = '2.0.1.2'
 end

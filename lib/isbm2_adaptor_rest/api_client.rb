@@ -16,7 +16,7 @@ require 'logger'
 require 'tempfile'
 require 'time'
 require 'typhoeus'
-require 'uri' # look at using 'cgi' and `CGI.escape` instead
+require 'cgi'
 
 module IsbmRestAdaptor
   class ApiClient
@@ -294,9 +294,9 @@ module IsbmRestAdaptor
     def build_request_url(path, opts = {})
       # Add leading and trailing slashes to path
       path = "/#{path}".gsub(/\/+/, '/')
-      # only encode base_url in case the config has been modified, 
+      # base_url returns CGI.escape url
       # each dynamic path should encoded at the time the path is constructed.
-      URI.encode(@config.base_url(opts[:operation])) + path
+      @config.base_url(opts[:operation]) + path
     end
 
     # Update hearder and query params based on authentication settings.
